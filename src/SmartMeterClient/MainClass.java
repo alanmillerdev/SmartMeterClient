@@ -13,7 +13,6 @@ public class MainClass {
 	      public void run()
 	      {
 	        System.out.println("Shutdown Hook - Save Data Here");
-			System.out.println("TETS 1!!!!");
 	      }
 	    });
 	}
