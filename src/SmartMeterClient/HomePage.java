@@ -153,10 +153,12 @@ public class HomePage extends JFrame {
 	}
 
 	// Error caused here when trying to draw the border
+	/*
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawRoundRect(20, 40, 1360, 740, 50, 30);
 		g2d.drawRoundRect(40, 60, 1320, 650, 50, 30);
 	}
+	*/
 }
