@@ -2,21 +2,46 @@ package SmartMeterClient;
 
 public class Controller {
 
+	Config config = new Config();
+
+	Settings settings = new Settings();
+
+	HomePage homePage;
+
+	StatisticsPage statisticsPage;
+
+	SettingsPage settingsPage;
+
 	public Controller() {
 
-		// Load Config
+		
 
 	}
 
 	public void startUp() {
+		
+		displayHomePage();
 
-		Config config;
-		config = new Config();
+	}
 
-		HomePage homePage;
+	public void displayHomePage()
+	{
+		homePage = new HomePage(this, config, settings);
+	}
 
-		homePage = new HomePage(this, config);
+	public void displayStatisticsPage()
+	{
+		statisticsPage = new StatisticsPage(this, config, settings);
+	}
 
+	public void displayCalendarPage()
+	{
+		//calendarPage = new CalendarPage(this, config, settings);
+	}
+
+	public void displaySettingsPage()
+	{
+	 	settingsPage = new SettingsPage(this, config, settings);
 	}
 
 }

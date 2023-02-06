@@ -20,13 +20,25 @@ public class HomePage extends JFrame {
 
 	private JPanel contentPane;
 
-	public HomePage(Controller controller, Config config) {
+	private Controller controller;
 
-		buildFrame(config);
+	private Config config;
 
-	}
+	private Settings settings;
 
-	public void buildFrame(Config config) {
+	public HomePage(Controller passedController, Config passedConfig, Settings passedSettings) {
+
+		this.controller = passedController;
+
+		this.config = passedConfig;
+
+		this.settings = passedSettings;
+
+		buildFrame();
+
+    }
+
+    public void buildFrame() {
 
 		setTitle(config.getFrameTitle());
 
@@ -56,7 +68,10 @@ public class HomePage extends JFrame {
 			btnHome.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Ben");
+					
+					dispose();
+					controller.displayHomePage();
+
 				}
 			});
 			btnHome.setBounds(648, 683, 64, 64);
@@ -76,7 +91,10 @@ public class HomePage extends JFrame {
 			btnSettings.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Ben");
+					
+					dispose();
+					controller.displaySettingsPage();
+
 				}
 			});
 			btnSettings.setBounds(808, 683, 64, 64);
@@ -96,7 +114,10 @@ public class HomePage extends JFrame {
 			btnRefresh.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Ben");
+					
+					revalidate();
+					repaint();
+					
 				}
 			});
 			btnRefresh.setBounds(728, 683, 64, 64);
@@ -116,7 +137,10 @@ public class HomePage extends JFrame {
 			btnCalendar.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Ben");
+					
+					dispose();
+					controller.displayCalendarPage();
+
 				}
 			});
 			btnCalendar.setBounds(568, 683, 64, 64);
@@ -136,13 +160,16 @@ public class HomePage extends JFrame {
 			btnStatistics.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Ben");
+					
+					dispose();
+					controller.displayStatisticsPage();
+
 				}
 			});
 			btnStatistics.setBounds(488, 683, 64, 64);
 			contentPane.add(btnStatistics);
-		} catch (IOException btnCalendarErr) {
-			System.out.println("Calendar Icon unable to load");
+		} catch (IOException btnStatisticsErr) {
+			System.out.println("Statistics Icon unable to load");
 			System.exit(2);
 		}
 
