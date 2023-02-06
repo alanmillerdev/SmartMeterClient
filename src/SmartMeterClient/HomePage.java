@@ -1,6 +1,7 @@
 package SmartMeterClient;
 
 import java.awt.BasicStroke;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -16,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class HomePage extends JFrame {
 
@@ -57,9 +62,23 @@ public class HomePage extends JFrame {
 
 		contentPane.setLayout(null);
 
+		//Clock
+		JLabel onScreenClock = new JLabel();
+		onScreenClock.setBounds(1280, 40, 200, 32);
+		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 24));
+
+		Timer timer = new Timer(1000, (ActionEvent e) -> {
+			DateTimeFormatter myTime = DateTimeFormatter.ofPattern("HH:mm");
+			LocalDateTime now = LocalDateTime.now(); 
+			onScreenClock.setText(String.valueOf(myTime.format(now)));
+		});
+		timer.setRepeats(true);
+		timer.start();
+		contentPane.add(onScreenClock);
+		
 		//Static Images
 		// Background Image
-		
+
 		//Battery Icon
 		JLabel batteryIcon;
 		try {
