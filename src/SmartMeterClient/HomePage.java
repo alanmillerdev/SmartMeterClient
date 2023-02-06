@@ -40,9 +40,9 @@ public class HomePage extends JFrame {
 
 		buildFrame();
 
-    }
+	}
 
-    public void buildFrame() {
+	public void buildFrame() {
 
 		setTitle(config.getFrameTitle());
 
@@ -60,47 +60,62 @@ public class HomePage extends JFrame {
 
 		contentPane.setLayout(null);
 
-		//Clock
+		// Clock
 		JLabel onScreenClock = new JLabel();
 		onScreenClock.setBounds(1280, 40, 200, 32);
 		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 24));
 
 		Timer timer = new Timer(1000, (ActionEvent e) -> {
 			DateTimeFormatter myTime = DateTimeFormatter.ofPattern("HH:mm");
-			LocalDateTime now = LocalDateTime.now(); 
+			LocalDateTime now = LocalDateTime.now();
 			onScreenClock.setText(String.valueOf(myTime.format(now)));
 		});
 		timer.setRepeats(true);
 		timer.start();
 		contentPane.add(onScreenClock);
-		
-		//Static Images
-		// Background Image
 
-		//Battery Icon
+		// Static Images
+		// Background Image
+		JLabel backgroundImage;
+		try {
+			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SmartMeterClient/Icons/background.png"));
+			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
+			backgroundImage.setBounds(0, 0, 1400, 800);
+			contentPane.add(backgroundImage);
+			contentPane.setComponentZOrder(backgroundImage, 1);
+		} catch (IOException backgroundImageErr) {
+			System.out.println("Background Image unable to load");
+			System.exit(2);
+		}
+
+		// Icon Images
+
+		// Battery Icon
 		JLabel batteryIcon;
 		try {
 			BufferedImage batteryIconImage = ImageIO.read(new File("src/SmartMeterClient/Icons/battery.png"));
 			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
-			batteryIcon.setBounds(1187, 40, 64, 32);
+			batteryIcon.setBounds(1210, 40, 64, 32);
 			contentPane.add(batteryIcon);
+			contentPane.setComponentZOrder(batteryIcon, 0);
 		} catch (IOException batteryIconErr) {
 			System.out.println("Battery Icon unable to load");
 			System.exit(2);
 		}
 
-		//Signal Icon
+		// Signal Icon
 		JLabel signalIcon;
 		try {
 			BufferedImage signalIconImage = ImageIO.read(new File("src/SmartMeterClient/Icons/signal.png"));
 			signalIcon = new JLabel(new ImageIcon(signalIconImage));
 			signalIcon.setBounds(40, 40, 32, 32);
 			contentPane.add(signalIcon);
+			contentPane.setComponentZOrder(signalIcon, 0);
 		} catch (IOException signalIconErr) {
 			System.out.println("Signal Icon unable to load");
 			System.exit(2);
 		}
-		
+
 		// Navigation
 		// Home Navigation Button
 		JButton btnHome;
@@ -112,14 +127,15 @@ public class HomePage extends JFrame {
 			btnHome.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					
+
 					dispose();
 					controller.displayHomePage();
 
 				}
 			});
-			btnHome.setBounds(648, 683, 64, 64);
+			btnHome.setBounds(648, 687, 64, 64);
 			contentPane.add(btnHome);
+			contentPane.setComponentZOrder(btnHome, 0);
 		} catch (IOException btnHomeErr) {
 			System.out.println("Home Icon unable to load");
 			System.exit(2);
@@ -135,14 +151,15 @@ public class HomePage extends JFrame {
 			btnSettings.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					
+
 					dispose();
 					controller.displaySettingsPage();
 
 				}
 			});
-			btnSettings.setBounds(808, 683, 64, 64);
+			btnSettings.setBounds(808, 687, 64, 64);
 			contentPane.add(btnSettings);
+			contentPane.setComponentZOrder(btnSettings, 0);
 		} catch (IOException btnSettingsErr) {
 			System.out.println("Settings Icon unable to load");
 			System.exit(2);
@@ -158,14 +175,15 @@ public class HomePage extends JFrame {
 			btnRefresh.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					
+
 					revalidate();
 					repaint();
-					
+
 				}
 			});
-			btnRefresh.setBounds(728, 683, 64, 64);
+			btnRefresh.setBounds(728, 687, 64, 64);
 			contentPane.add(btnRefresh);
+			contentPane.setComponentZOrder(btnRefresh, 0);
 		} catch (IOException btnRefreshErr) {
 			System.out.println("Refresh Icon unable to load");
 			System.exit(2);
@@ -181,14 +199,15 @@ public class HomePage extends JFrame {
 			btnCalendar.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					
+
 					dispose();
 					controller.displayCalendarPage();
 
 				}
 			});
-			btnCalendar.setBounds(568, 683, 64, 64);
+			btnCalendar.setBounds(568, 687, 64, 64);
 			contentPane.add(btnCalendar);
+			contentPane.setComponentZOrder(btnCalendar, 0);
 		} catch (IOException btnCalendarErr) {
 			System.out.println("Calendar Icon unable to load");
 			System.exit(2);
@@ -204,14 +223,15 @@ public class HomePage extends JFrame {
 			btnStatistics.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					
+
 					dispose();
 					controller.displayStatisticsPage();
 
 				}
 			});
-			btnStatistics.setBounds(488, 683, 64, 64);
+			btnStatistics.setBounds(488, 687, 64, 64);
 			contentPane.add(btnStatistics);
+			contentPane.setComponentZOrder(btnStatistics, 0);
 		} catch (IOException btnStatisticsErr) {
 			System.out.println("Statistics Icon unable to load");
 			System.exit(2);
@@ -223,13 +243,4 @@ public class HomePage extends JFrame {
 		this.setVisible(true);
 	}
 
-	// Error caused here when trying to draw the border
-	/* 
-	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawRoundRect(20, 40, 1360, 740, 50, 30);
-		g2d.drawRoundRect(40, 60, 1320, 650, 50, 30);
-	}
-	*/
-	
 }
