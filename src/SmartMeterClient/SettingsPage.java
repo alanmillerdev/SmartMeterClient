@@ -57,7 +57,6 @@ public class SettingsPage extends JFrame{
 		contentPane.setLayout(null);
 
 		// Navigation
-
 		// Home Navigation Button
 		JButton btnHome;
 		try {

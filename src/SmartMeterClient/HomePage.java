@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class HomePage extends JFrame {
@@ -56,8 +57,34 @@ public class HomePage extends JFrame {
 
 		contentPane.setLayout(null);
 
-		// Navigation
+		//Static Images
+		// Background Image
+		
+		//Battery Icon
+		JLabel batteryIcon;
+		try {
+			BufferedImage batteryIconImage = ImageIO.read(new File("src/SmartMeterClient/Icons/battery.png"));
+			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
+			batteryIcon.setBounds(1187, 40, 64, 32);
+			contentPane.add(batteryIcon);
+		} catch (IOException batteryIconErr) {
+			System.out.println("Battery Icon unable to load");
+			System.exit(2);
+		}
 
+		//Signal Icon
+		JLabel signalIcon;
+		try {
+			BufferedImage signalIconImage = ImageIO.read(new File("src/SmartMeterClient/Icons/signal.png"));
+			signalIcon = new JLabel(new ImageIcon(signalIconImage));
+			signalIcon.setBounds(40, 40, 32, 32);
+			contentPane.add(signalIcon);
+		} catch (IOException signalIconErr) {
+			System.out.println("Signal Icon unable to load");
+			System.exit(2);
+		}
+		
+		// Navigation
 		// Home Navigation Button
 		JButton btnHome;
 		try {
