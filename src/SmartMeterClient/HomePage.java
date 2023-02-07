@@ -1,8 +1,6 @@
 package SmartMeterClient;
 
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -18,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class HomePage extends JFrame {
@@ -60,20 +59,30 @@ public class HomePage extends JFrame {
 
 		contentPane.setLayout(null);
 
+		//Announcement Text
+		JLabel announcementText = new JLabel(controller.announcementHandler(), SwingConstants.CENTER);
+		announcementText.setBounds(80,45, 1100, 32);
+		announcementText.setFont(new Font("Serif", Font.PLAIN, 32));
+		
+		
 		// Clock
 		JLabel onScreenClock = new JLabel();
-		onScreenClock.setBounds(1280, 40, 200, 32);
-		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 24));
+		onScreenClock.setBounds(1260, 45, 200, 32);
+		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 32));
+		
 
 		Timer timer = new Timer(1000, (ActionEvent e) -> {
 			DateTimeFormatter myTime = DateTimeFormatter.ofPattern("HH:mm");
 			LocalDateTime now = LocalDateTime.now();
 			onScreenClock.setText(String.valueOf(myTime.format(now)));
+			announcementText.setText(controller.announcementHandler());
 		});
+
 		timer.setRepeats(true);
 		timer.start();
 		contentPane.add(onScreenClock);
-
+		contentPane.add(announcementText);
+		
 		// Static Images
 		// Background Image
 		JLabel backgroundImage;
@@ -82,7 +91,7 @@ public class HomePage extends JFrame {
 			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
 			backgroundImage.setBounds(0, 0, 1400, 800);
 			contentPane.add(backgroundImage);
-			contentPane.setComponentZOrder(backgroundImage, 1);
+			contentPane.setComponentZOrder(backgroundImage, 2);
 		} catch (IOException backgroundImageErr) {
 			System.out.println("Background Image unable to load");
 			System.exit(2);
@@ -95,9 +104,9 @@ public class HomePage extends JFrame {
 		try {
 			BufferedImage batteryIconImage = ImageIO.read(new File("src/SmartMeterClient/Icons/battery.png"));
 			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
-			batteryIcon.setBounds(1210, 40, 64, 32);
+			batteryIcon.setBounds(1190, 45, 64, 32);
 			contentPane.add(batteryIcon);
-			contentPane.setComponentZOrder(batteryIcon, 0);
+			contentPane.setComponentZOrder(batteryIcon, 1);
 		} catch (IOException batteryIconErr) {
 			System.out.println("Battery Icon unable to load");
 			System.exit(2);
@@ -110,7 +119,7 @@ public class HomePage extends JFrame {
 			signalIcon = new JLabel(new ImageIcon(signalIconImage));
 			signalIcon.setBounds(40, 40, 32, 32);
 			contentPane.add(signalIcon);
-			contentPane.setComponentZOrder(signalIcon, 0);
+			contentPane.setComponentZOrder(signalIcon, 1);
 		} catch (IOException signalIconErr) {
 			System.out.println("Signal Icon unable to load");
 			System.exit(2);
@@ -135,7 +144,7 @@ public class HomePage extends JFrame {
 			});
 			btnHome.setBounds(648, 687, 64, 64);
 			contentPane.add(btnHome);
-			contentPane.setComponentZOrder(btnHome, 0);
+			contentPane.setComponentZOrder(btnHome, 1);
 		} catch (IOException btnHomeErr) {
 			System.out.println("Home Icon unable to load");
 			System.exit(2);
@@ -159,7 +168,7 @@ public class HomePage extends JFrame {
 			});
 			btnSettings.setBounds(808, 687, 64, 64);
 			contentPane.add(btnSettings);
-			contentPane.setComponentZOrder(btnSettings, 0);
+			contentPane.setComponentZOrder(btnSettings, 1);
 		} catch (IOException btnSettingsErr) {
 			System.out.println("Settings Icon unable to load");
 			System.exit(2);
@@ -183,7 +192,7 @@ public class HomePage extends JFrame {
 			});
 			btnRefresh.setBounds(728, 687, 64, 64);
 			contentPane.add(btnRefresh);
-			contentPane.setComponentZOrder(btnRefresh, 0);
+			contentPane.setComponentZOrder(btnRefresh, 1);
 		} catch (IOException btnRefreshErr) {
 			System.out.println("Refresh Icon unable to load");
 			System.exit(2);
@@ -207,7 +216,7 @@ public class HomePage extends JFrame {
 			});
 			btnCalendar.setBounds(568, 687, 64, 64);
 			contentPane.add(btnCalendar);
-			contentPane.setComponentZOrder(btnCalendar, 0);
+			contentPane.setComponentZOrder(btnCalendar, 1);
 		} catch (IOException btnCalendarErr) {
 			System.out.println("Calendar Icon unable to load");
 			System.exit(2);
@@ -231,14 +240,12 @@ public class HomePage extends JFrame {
 			});
 			btnStatistics.setBounds(488, 687, 64, 64);
 			contentPane.add(btnStatistics);
-			contentPane.setComponentZOrder(btnStatistics, 0);
+			contentPane.setComponentZOrder(btnStatistics, 1);
 		} catch (IOException btnStatisticsErr) {
 			System.out.println("Statistics Icon unable to load");
 			System.exit(2);
 		}
 
-		// Display Content Pane Once it has loaded
-		repaint();
 		setContentPane(contentPane);
 		this.setVisible(true);
 	}

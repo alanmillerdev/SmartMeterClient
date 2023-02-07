@@ -91,43 +91,50 @@ public class Controller {
 
 		String announcement = null;
 
+		System.out.println(status);
+
 		switch(status)
 		{
 			case "Select":
 				
-			announcement = "Please select your timeslots in the calendar!";
+				announcement = "Please select your timeslots in the calendar!";
+				break;
 
 			case "Selected":
 
-			announcement = "Timeslots will be assigned shortly!";
+				announcement = "Timeslots will be assigned shortly!";
+				break;
 
 			case "Assigned":
 
-			announcement = "Timeslots have been assigned, check your calendar!";
+				announcement = "Timeslots have been assigned, check your calendar!";
+				break;
 
 			default:
 
-			LocalDateTime now = LocalDateTime.now();
+				LocalDateTime now = LocalDateTime.now();
 
-			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH");
+				DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH");
 
-			String time = timeFormatter.format(now);
+				String time = timeFormatter.format(now);
 
-			int hour = Integer.parseInt(time);
+				int hour = Integer.parseInt(time);
 
-				if(hour >= 0 && hour < 12)
-				{
-					announcement = "Good morning";
-				}
-				else if(hour >= 12 && hour < 17)
-				{
-					announcement = "Good afternoon";
-				}
-				else if(hour >= 17 && hour <= 23)
-				{
-					announcement = "Good evening";
-				}
+					if(hour >= 0 && hour < 12)
+					{
+						announcement = "Good morning";
+					}
+					else if(hour >= 12 && hour < 17)
+					{
+						announcement = "Good afternoon";
+					}
+					else if(hour >= 17 && hour <= 23)
+					{
+						announcement = "Good evening";
+					}
+				break;
 			}
+
 		return announcement;
 	}
 }
