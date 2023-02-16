@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author alanm
- *
- */
-package SmartMeterClient;
