@@ -34,8 +34,6 @@ public class ArenaEnvironment {
      *                        establishing baseline results.
      * @param selectedSingleAgentType Integer value representing the single agent type to be modelled when
      *                                singleAgentType is true.
-     * @param pythonExe String representing the system path to python environment executable.
-     * @param pythonPath String representing the system path to the python data visualiser.
      * @exception IOException On input error.
      * @see IOException
      */
@@ -53,9 +51,7 @@ public class ArenaEnvironment {
             int numberOfAgentsToEvolve,
             int[] agentTypes,
             boolean singleAgentType,
-            int selectedSingleAgentType,
-            String pythonExe,
-            String pythonPath
+            int selectedSingleAgentType
     ) throws IOException {
 
         System.out.println("Starting simulation...");
@@ -461,29 +457,6 @@ public class ArenaEnvironment {
         allDailyDataCSVWriter.close();
         perAgentDataCSVWriter.close();
         eachRoundDataCSVWriter.close();
-        simulationDataWriter.close();
-
-        /**
-         * Begins python code that visualises the gathered data from the current environment being simulated.
-         *
-         * @param pythonExe String representing the system path to python environment executable.
-         * @param pythonPath String representing the system path to the python data visualiser.
-         * @param folderName String representing the output destination folder, used to organise output data.
-         * @param environmentTag String detailing specifics about the simulation environment.
-         * @param dataFile Stores all the data that can be analysed for each day.
-         * @param typicalSocial The most average performing social run.
-         * @param typicalSelfish The most average performing selfish run.
-         * @exception IOException On input error.
-         * @see IOException
-         */
-        new SimulationVisualiserInitiator(
-                pythonExe,
-                pythonPath,
-                folderName,
-                environmentTag,
-                allDailyData,
-                middleSocial,
-                middleSelfish
-        );
+        simulationDataWriter.close();        
     }
 }
