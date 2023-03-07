@@ -17,23 +17,33 @@ public class SmartMeterBackend extends UserParameters {
     // allow for result replication given a specific user seed.
     static Random random = new Random();
 
+     public void smartMeterRun()
+     {
+
+        
+
+     }
+     
     /**
-     * This is the main method which runs the entire ResourceExchangeArena simulation.
+     * This is the headlessSimulation method which runs a headless version of the ResourceExchangeArena simulation.
+     * This can be used to run simulations to get results to compare with the GUI version.
      *
      * @param args Unused.
      * @exception IOException On input error.
      * @see IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void headlessSimulation() throws IOException
+    {
+
         switch (COMPARISON_LEVEL) {
             case 1:
                 // Test user parameters with and without social capital for comparison.
                 USE_SOCIAL_CAPITAL = false;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 1 / 2 ENVIRONMENT VERSIONS COMPLETE **********");
 
                 USE_SOCIAL_CAPITAL = true;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 2 / 2 ENVIRONMENT VERSIONS COMPLETE **********");
                 break;
             case 2:
@@ -41,34 +51,34 @@ public class SmartMeterBackend extends UserParameters {
                 USE_SOCIAL_CAPITAL = false;
                 SINGLE_AGENT_TYPE = true;
                 SELECTED_SINGLE_AGENT_TYPE = SELFISH;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 1 / 5 ENVIRONMENT VERSIONS COMPLETE **********");
 
                 USE_SOCIAL_CAPITAL = false;
                 SINGLE_AGENT_TYPE = true;
                 SELECTED_SINGLE_AGENT_TYPE = SOCIAL;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 2 / 5 ENVIRONMENT VERSIONS COMPLETE **********");
 
                 USE_SOCIAL_CAPITAL = true;
                 SINGLE_AGENT_TYPE = true;
                 SELECTED_SINGLE_AGENT_TYPE = SOCIAL;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 3 / 5 ENVIRONMENT VERSIONS COMPLETE **********");
 
                 USE_SOCIAL_CAPITAL = false;
                 SINGLE_AGENT_TYPE = false;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 4 / 5 ENVIRONMENT VERSIONS COMPLETE **********");
 
                 USE_SOCIAL_CAPITAL = true;
                 SINGLE_AGENT_TYPE = false;
-                runSimulationSet();
+                runHeadlessSimulationSet();
                 System.out.println("********** 5 / 5 ENVIRONMENT VERSIONS COMPLETE **********");
                 break;
             default:
                 // Run only the set of parameters defined by the user.
-                runSimulationSet();
+                runHeadlessSimulationSet();
         }
 
         // String version of starting ratios for file names.
@@ -87,8 +97,8 @@ public class SmartMeterBackend extends UserParameters {
             startingRatiosArray.add(ratio);          
         }
     }
-    
-    private static void runSimulationSet() throws IOException {
+
+    private static void runHeadlessSimulationSet() throws IOException {
         // Set the simulations initial random seed.
         random.setSeed(seed);
 

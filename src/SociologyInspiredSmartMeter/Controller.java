@@ -1,7 +1,11 @@
 package SociologyInspiredSmartMeter;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
+
 
 import SociologyInspiredSmartMeter.SmartMeterClient.Config;
 import SociologyInspiredSmartMeter.SmartMeterClient.HomePage;
@@ -16,6 +20,7 @@ public class Controller {
 	 */
 	Config config = new Config();
 	Settings settings = new Settings();
+	SmartMeterBackend backend = new SmartMeterBackend();
 
 	/*
 	 * The home page is the first page that is displayed when the application is started.
@@ -38,6 +43,7 @@ public class Controller {
 	 */
 	String status;
 
+	
 
 	public Controller() {
 
@@ -50,15 +56,16 @@ public class Controller {
 	 * startUp() is called when the application is started.
 	 */
 	public void startUp() {
-		
+
 		displayHomePage();
+		
+		backend.smartMeterRun();
 
 	}
 
 	/*
 	 * displayHomePage() is called when the user clicks the home button.
 	 */
-
 	public void displayHomePage()
 	{
 		homePage = new HomePage(this, config, settings);
