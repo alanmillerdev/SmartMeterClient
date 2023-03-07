@@ -19,18 +19,6 @@ public abstract class UserParameters extends FixedParameters {
         // Macbook Location:
         public static final String FOLDER_NAME = "C:/Users/alanm/Desktop/ResourceExchangeArena/results/Set_" + seed;
 
-        // Conda env. location.
-        // Original Location: "/home/brooks/anaconda3/envs/rea/bin/python3"
-        // Windows PC Location: "C:/Users/alanm/anaconda3/envs/REA/python.exe"
-        // Macbook Location:
-        public static final String PYTHON_EXE = "C:/Users/alanm/anaconda3/envs/REA/python.exe";
-
-        // Location of data visualiser python scripts on your machine.
-        // Original Location: "/home/brooks/code/ResourceExchangeArena/src/data_analysis/"
-        // Windows PC Location: "C:/Users/alanm/DesktopResourceExchangeArena/src/data_analysis"
-        // Macbook Location:
-        public static final String PYTHON_PATH = "C:/Users/alanm/Desktop/ResourceExchangeArena/src/data_analysis/";
-
         // Alter the population size.
         public static final int POPULATION_SIZE = 96;
 
