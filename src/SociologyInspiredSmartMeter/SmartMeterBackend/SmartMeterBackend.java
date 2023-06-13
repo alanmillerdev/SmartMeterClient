@@ -11,17 +11,21 @@ import java.util.Random;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.parameters.UserParameters;
 
-public class SmartMeterBackend extends UserParameters {
+public class SmartMeterBackend extends UserParameters implements Runnable {
 
     // Create a single Random object for generating random numerical data for the simulation, a single object exists to
     // allow for result replication given a specific user seed.
     static Random random = new Random();
 
-     public void smartMeterRun()
-     {
-
-        
-
+     @Override
+     public void run() {
+         // TODO Auto-generated method stub
+            try {
+                headlessSimulation();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
      }
      
     /**

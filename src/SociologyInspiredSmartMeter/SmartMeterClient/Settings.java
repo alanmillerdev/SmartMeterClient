@@ -16,11 +16,11 @@ public class Settings {
 	String agentMode;
 
     /*
-     * applianceSelection is a Boolean value that determines if the user is selecting appliances and timeslots or just timeslots.
-     * True (A Mode) allows the user to select appliances and timeslots.
-     * False (B Mode) allows the user to only select timeslots.
+     * applicationMode is a String value that determines if the user is selecting appliances and timeslots or just timeslots.
+     * "Appliance" allows the user to select appliances and timeslots.
+     * "Generic" allows the user to only select timeslots.
      */
-    Boolean applianceSelection;
+    String applicationMode;
 
     /*
      * Default constructor for the settings class.
@@ -33,9 +33,9 @@ public class Settings {
      * @param agentMode is a String value that determines which approach the agent is taking.
      * @param applianceSelection is a Boolean value that determines if the user is selecting appliances and timeslots or just timeslots.
      */
-    public Settings(String agentMode, Boolean applianceSelection) {
+    public Settings(String agentMode, String applicationMode) {
         this.agentMode = agentMode;
-        this.applianceSelection = applianceSelection;
+        this.applicationMode = applicationMode;
     }
 
     public String getAgentMode() {
@@ -46,12 +46,12 @@ public class Settings {
         this.agentMode = agentMode;
     }
 
-    public Boolean getApplianceSelection() {
-        return applianceSelection;
+    public String getApplicationMode() {
+        return applicationMode;
     }
 
-    public void setApplianceSelection(Boolean applianceSelection) {
-        this.applianceSelection = applianceSelection;
+    public void setApplicationMode(String applicationMode) {
+        this.applicationMode = applicationMode;
     }
 
 }

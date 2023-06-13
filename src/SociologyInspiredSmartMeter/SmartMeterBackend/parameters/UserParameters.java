@@ -27,11 +27,11 @@ public abstract class UserParameters extends FixedParameters {
 
         // Alter the length of time to be simulated once the simulation has reached a
         // steady population state.
-        public static final int DAYS = 100;
+        public static final int DAYS = 1;
         // Example: "500"
 
         // Increase the number of simulation runs for more consistent results.
-        public static final int SIMULATION_RUNS = 5;
+        public static final int SIMULATION_RUNS = 1;
         // Example: "50"
 
         // Specify whether only a single agent type should exist in the simulation, used

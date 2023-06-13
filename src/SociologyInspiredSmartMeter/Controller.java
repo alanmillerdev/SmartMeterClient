@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
-
-
+import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPagePreferenceSelection;
+import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageTimeslotTimeline;
 import SociologyInspiredSmartMeter.SmartMeterClient.Config;
 import SociologyInspiredSmartMeter.SmartMeterClient.HomePage;
 import SociologyInspiredSmartMeter.SmartMeterClient.Settings;
@@ -39,16 +39,33 @@ public class Controller {
 	SettingsPage settingsPage;
 
 	/*
+	 * The calendar preference selection page allows the user to select their timeslots for the day.
+	 */
+	CalendarPagePreferenceSelection calendarPagePreferenceSelection;
+
+	/*
+	 * The preference timeline page shows the user the timeslots that they have selected.
+	 */
+	CalendarPageTimeslotTimeline preferenceTimelinePage;
+
+	/*
+	 * The assigned timeline page shows the user the timeslots that have been assigned to them.
+	 */
+	CalendarPageTimeslotTimeline displayAssignedTimelinePage;
+
+	/*
 	 * Status is used to determine what the announcement should be
 	 */
 	String status;
-
-	
 
 	public Controller() {
 
 		//Sets the status to "Select" by default
 		status = "Select";
+
+		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
+		settings.setAgentMode("Social");
+		settings.setApplicationMode("Appliance");
 
 	}
 
@@ -59,7 +76,7 @@ public class Controller {
 
 		displayHomePage();
 		
-		backend.smartMeterRun();
+		backend.run();
 
 	}
 
@@ -84,7 +101,21 @@ public class Controller {
 	 */
 	public void displayCalendarPage()
 	{
-		//calendarPage = new CalendarPage(this, config, settings);
+
+		calendarPagePreferenceSelection = new CalendarPagePreferenceSelection(this, config, settings);
+
+	}
+
+	public void displayPreferenceTimelinePage()
+	{
+
+		preferenceTimelinePage = new CalendarPageTimeslotTimeline(this, config, settings);
+
+	}
+
+	public void displayAssignedTimelinePage()
+	{
+		displayAssignedTimelinePage = new CalendarPageTimeslotTimeline(this, config, settings);
 	}
 
 	/*
@@ -110,7 +141,32 @@ public class Controller {
 		{
 			case "Select":
 				
-				announcement = "Please select your timeslots in the calendar!";
+				announcement = "Please Select your Timeslots for Today!";
+				break;
+
+			case "Selecting4":
+				
+				announcement = "Please Select 4 more timeslots!";
+				break;
+			
+			case "Selecting3":
+				
+				announcement = "Please Select 3 more timeslots!";
+				break;
+
+			case "Selecting2":
+				
+				announcement = "Please Select 2 more timeslots!";
+				break;
+
+			case "Selecting1":
+				
+				announcement = "Please Select 1 more timeslot!";
+				break;
+
+			case "selecting0":
+				
+				announcement = "Please Submit your Timeslots!";
 				break;
 
 			case "Selected":
@@ -120,9 +176,13 @@ public class Controller {
 
 			case "Assigned":
 
-				announcement = "Timeslots have been assigned, check your calendar!";
+				announcement = "Timeslots have been assigned!";
 				break;
 
+			case "Feedback":
+				announcement = "Please provide feedback on your assigned timeslots!";
+				break;
+			
 			default:
 
 				LocalDateTime now = LocalDateTime.now();
@@ -150,5 +210,15 @@ public class Controller {
 
 		return announcement;
 	}
-}
 
+	public void PreferenceSubmissionHandler()
+	{
+		
+		//Ensure that the user has selected 4 timeslots.
+		//If the user has selected 4 timeslots, submit the 4 timeslots to the controller.
+		//Controller close the current page and open the timeline display page.
+		displayPreferenceTimelinePage();
+		status = "Selected";
+
+	}
+}
