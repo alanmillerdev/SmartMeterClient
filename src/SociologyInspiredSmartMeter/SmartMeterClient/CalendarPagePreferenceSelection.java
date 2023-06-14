@@ -8,15 +8,19 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
@@ -35,6 +39,14 @@ public class CalendarPagePreferenceSelection extends JFrame{
 	private String selectedAppliance;
 
 	private String selectedTimeslot;
+
+	//Stores the timeslot preferences input by the user to be sent to the controller.
+	//Used in both modes, but in generic mode, the appliance preferences are set to null.
+	HashMap<Integer, String> timeslotPreferences = new HashMap<Integer, String>();
+
+	DefaultListModel<String> UITimeslotList = new DefaultListModel<>();
+
+	JComboBox<String> timeslotComboBox;
 
 	public CalendarPagePreferenceSelection(SociologyInspiredSmartMeter.Controller passedController, Config passedConfig, Settings passedSettings) {
 
@@ -116,7 +128,6 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		}
 
 		// Icon Images
-
 		// Battery Icon
 		JLabel batteryIcon;
 		try {
@@ -308,9 +319,52 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		JButton addPreferenceButton = new JButton("Add timeslot to preference list");
 		addPreferenceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				System.out.println(selectedAppliance + " " + selectedTimeslot);
 
+				if(settings.getApplicationMode() == "Appliance")
+				{
+					if(selectedAppliance == null)
+					{
+						JOptionPane.showMessageDialog(null, "Please select an appliance.");
+						return;
+					} else if(selectedTimeslot == null || selectedTimeslot.equals("Select a timeslot"))
+					{
+						JOptionPane.showMessageDialog(null, "Please select a timeslot.");
+						return;
+					} else if(UITimeslotList.size() == 4)
+					{
+						JOptionPane.showMessageDialog(null, "You have already selected 4 timeslots. Please submit your timeslot preferences.");
+						return;
+					} else 
+					{
+						//Adds the timeslot and the appliance to the timeslot preference list to be used in the algorithm and UI.
+						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
+						//Creates a string to be displayed in the UI.
+						UITimeslotList.addElement(selectedAppliance + " at " + selectedTimeslot);
+						timeslotComboBox.setSelectedIndex(0);
+						selectedAppliance = null;
+						selectedTimeslot = null;
+					}	
+				} else if(settings.getApplicationMode() == "Generic")
+				{
+					if(selectedTimeslot == null || selectedTimeslot.equals("Select a timeslot"))
+					{
+						JOptionPane.showMessageDialog(null, "Please select a timeslot.");
+						return;
+					} else if(UITimeslotList.size() == 4)
+					{
+						JOptionPane.showMessageDialog(null, "You have already selected 4 timeslots. Please submit your timeslot preferences.");
+						return;
+					} else 
+					{
+						//Adds the timeslot and the appliance to the timeslot preference list to be used in the algorithm and UI.
+						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
+						//Creates a string to be displayed in the UI.
+						UITimeslotList.addElement("1 kWh available at " + selectedTimeslot);
+						timeslotComboBox.setSelectedIndex(0);
+						selectedAppliance = null;
+						selectedTimeslot = null;
+					}
+				}				
 			}
 		});
 		addPreferenceButton.setBounds(220, 600, 300, 50);
@@ -322,21 +376,32 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		JButton submitButton = new JButton("Submit timeslot preferences");
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				//Logic to handle timeslot submission
-
-				//Ensure that the user has selected 4 timeslots.
+				if(UITimeslotList.size() != 4)
+				{
+					JOptionPane.showMessageDialog(null, "Please select " + (4 - UITimeslotList.size()) + " more timeslots.");
+					return;
+				} else
+				{
 				//If the user has selected 4 timeslots, submit the 4 timeslots to the controller.
 				//Dispose of the current page.
 				dispose();
 				//Call the controller to handle next steps.
 				controller.PreferenceSubmissionHandler();
+				}
 			}
 		});
 		submitButton.setBounds(870, 600, 300, 50);
 		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		contentPane.add(submitButton);
 		contentPane.setComponentZOrder(submitButton, 1);
+
+		//Preferences List
+		JList<String> stringList = new JList<>(UITimeslotList);
+		stringList.setBounds(720, 180, 600, 420);
+		stringList.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		contentPane.add(stringList);
+		contentPane.setComponentZOrder(stringList, 1);
+
 	}
 
 	public void ApplicanceTimeslotSelectionUI()
@@ -403,7 +468,6 @@ public class CalendarPagePreferenceSelection extends JFrame{
 	contentPane.setComponentZOrder(tumbleDryerButton, 1);
 	contentPane.setComponentZOrder(tumbleDryerLabel, 1);
 	
-
 	dishwasherButton.setBounds(360, 145, 150, 150);
 	dishwasherLabel.setBounds(360, 280, 150, 50);
 	dishwasherLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -420,13 +484,15 @@ public class CalendarPagePreferenceSelection extends JFrame{
 	contentPane.setComponentZOrder(heaterButton, 1);
 	contentPane.setComponentZOrder(heaterLabel, 1);
 
-	String[] timeslots = new String[24];
-    for (int i = 0; i < 24; i++) {
-        timeslots[i] = String.format("%02d:00 - %02d:00", i, i+1);
+	String[] timeslots = new String[25];
+	timeslots[0] = "Select a timeslot";
+    for (int i = 1; i < 25; i++) {
+        timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
     }
 
-    JComboBox<String> timeslotComboBox = new JComboBox<>(timeslots);
-	timeslotComboBox.setBounds(60, 400, 150, 50);
+    timeslotComboBox = new JComboBox<>(timeslots);
+	timeslotComboBox.setBounds(210, 360, 300, 100);
+	timeslotComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	contentPane.add(timeslotComboBox);
 	contentPane.setComponentZOrder(timeslotComboBox, 1);
 	timeslotComboBox.addActionListener(new ActionListener() {
@@ -435,16 +501,27 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		}
 	});
 
-	//Preferences List
-	
-
-
 	}
 	
 	public void GenericTimeslotSelectionUI()
 	{
+		
+	String[] timeslots = new String[25];
+	timeslots[0] = "Select a timeslot";
+    for (int i = 1; i < 25; i++) {
+        timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
+    }
 
-	
+    timeslotComboBox = new JComboBox<>(timeslots);
+	timeslotComboBox.setBounds(210, 110, 300, 100);
+	timeslotComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	contentPane.add(timeslotComboBox);
+	contentPane.setComponentZOrder(timeslotComboBox, 1);
+	timeslotComboBox.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			selectedTimeslot = timeslotComboBox.getSelectedItem().toString();
+		}
+	});
 
 	}
 
