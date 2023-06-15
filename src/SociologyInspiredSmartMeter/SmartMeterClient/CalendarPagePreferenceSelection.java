@@ -340,6 +340,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
 						//Creates a string to be displayed in the UI.
 						UITimeslotList.addElement(selectedAppliance + " at " + selectedTimeslot);
+						timeslotComboBox.removeItem(selectedTimeslot);
 						timeslotComboBox.setSelectedIndex(0);
 						selectedAppliance = null;
 						selectedTimeslot = null;
@@ -360,6 +361,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
 						//Creates a string to be displayed in the UI.
 						UITimeslotList.addElement("1 kWh available at " + selectedTimeslot);
+						timeslotComboBox.removeItem(selectedTimeslot);
 						timeslotComboBox.setSelectedIndex(0);
 						selectedAppliance = null;
 						selectedTimeslot = null;
