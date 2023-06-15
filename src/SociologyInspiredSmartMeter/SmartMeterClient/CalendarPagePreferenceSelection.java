@@ -388,7 +388,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 				//Dispose of the current page.
 				dispose();
 				//Call the controller to handle next steps.
-				controller.PreferenceSubmissionHandler();
+				controller.PreferenceSubmissionHandler(timeslotPreferences);
 				}
 			}
 		});

@@ -1,6 +1,7 @@
 package SociologyInspiredSmartMeter.SmartMeterClient;
 
 import java.awt.Font;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -38,6 +39,10 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 		this.settings = passedSettings;
 
 		buildFrame();
+
+		staticElements();
+
+		timelineBuilder();
 
 		setContentPane(contentPane);
 
@@ -253,7 +258,128 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 	public void staticElements()
 	{
 
-        
+        //Static Label for the timeslot preference list.
+		JLabel preferenceListLabel = new JLabel("Timeslot Preference Timeline");
+		preferenceListLabel.setBounds(500, 100, 500, 50);
+		preferenceListLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		contentPane.add(preferenceListLabel);
+		contentPane.setComponentZOrder(preferenceListLabel, 1);
 
     }
+
+	public void timelineBuilder()
+	{
+
+		ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineSmall.png");
+		ImageIcon tumbleDryerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerSmall.png");
+		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherSmall.png");
+		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterSmall.png");
+
+		//For each timeslot in the preference list, create an icon and display it on the timeline.
+
+		controller.timeslotPreferences.forEach((key, value) -> {
+
+			JLabel label;
+
+			switch(value)
+			{
+				case "Washing Machine":
+					label = new JLabel(washingMachineImage);
+					break;
+				case "Tumble Dryer":
+				 	label = new JLabel(tumbleDryerImage);
+					break;
+				case "Dishwasher":
+					label = new JLabel(dishwasherImage);
+					break;
+				case "Heater":
+					label = new JLabel(heaterImage);
+					break;
+				default:
+					label = new JLabel(washingMachineImage);
+					break;
+			}
+
+			switch(key) {
+				case 0:
+					label.setBounds(62, 197, 32, 32);
+					break;
+				case 1:
+					label.setBounds(112, 197, 32, 32);
+					break;
+				case 2:
+					label.setBounds(168, 197, 32, 32);
+					break;
+				case 3:
+					label.setBounds(222, 197, 32, 32);
+					break;
+				case 4:
+					label.setBounds(278, 197, 32, 32);
+					break;
+				case 5:
+					label.setBounds(330, 197, 32, 32);
+					break;
+				case 6:
+					label.setBounds(384, 197, 32, 32);
+					break;
+				case 7:
+					label.setBounds(440, 197, 32, 32);
+					break;
+				case 8:
+					label.setBounds(494, 197, 32, 32);
+					break;
+				case 9:
+					label.setBounds(548, 197, 32, 32);
+					break;
+				case 10:
+					label.setBounds(604, 197, 32, 32);
+					break;
+				case 11:
+					label.setBounds(655, 197, 32, 32);
+					break;
+				case 12:
+					label.setBounds(708, 197, 32, 32);
+					break;
+				case 13:
+					label.setBounds(762, 197, 32, 32);
+					break;
+				case 14:
+					label.setBounds(814, 197, 32, 32);
+					break;
+				case 15:
+					label.setBounds(866, 197, 32, 32);
+					break;
+				case 16:
+					label.setBounds(918, 197, 32, 32);
+					break;
+				case 17:
+					label.setBounds(972, 197, 32, 32);
+					break;
+				case 18:
+					label.setBounds(1025, 197, 32, 32);
+					break;
+				case 19:
+					label.setBounds(1078, 197, 32, 32);
+					break;
+				case 20:
+					label.setBounds(1130, 197, 32, 32);
+					break;
+				case 21:
+					label.setBounds(1184, 197, 32, 32);
+					break;
+				case 22:
+					label.setBounds(1240, 197, 32, 32);
+					break;
+				case 23:
+					label.setBounds(1290, 197, 32, 32);
+					break;
+				default:
+					// code block
+			}
+
+		contentPane.add(label);
+		contentPane.setComponentZOrder(label, 1);
+
+	});	
+	}
 }

@@ -3,6 +3,7 @@ package SociologyInspiredSmartMeter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPagePreferenceSelection;
@@ -56,7 +57,10 @@ public class Controller {
 	/*
 	 * Status is used to determine what the announcement should be
 	 */
-	String status;
+	public String status;
+
+
+	public HashMap<Integer, String> timeslotPreferences = new HashMap<Integer, String>();
 
 	public Controller() {
 
@@ -211,14 +215,10 @@ public class Controller {
 		return announcement;
 	}
 
-	public void PreferenceSubmissionHandler()
+	public void PreferenceSubmissionHandler(HashMap<Integer, String> timeslotPreferences)
 	{
-		
-		//Ensure that the user has selected 4 timeslots.
-		//If the user has selected 4 timeslots, submit the 4 timeslots to the controller.
-		//Controller close the current page and open the timeline display page.
+		this.timeslotPreferences = timeslotPreferences;
 		displayPreferenceTimelinePage();
 		status = "Selected";
-
 	}
 }
