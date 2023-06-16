@@ -488,9 +488,11 @@ public class CalendarPagePreferenceSelection extends JFrame{
 
 	String[] timeslots = new String[25];
 	timeslots[0] = "Select a timeslot";
-    for (int i = 1; i < 25; i++) {
+    for (int i = 1; i < 24; i++) {
         timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
-    }
+    };
+	
+	timeslots[24] = "23:00 - 00:00";
 
     timeslotComboBox = new JComboBox<>(timeslots);
 	timeslotComboBox.setBounds(210, 360, 300, 100);
@@ -510,9 +512,11 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		
 	String[] timeslots = new String[25];
 	timeslots[0] = "Select a timeslot";
-    for (int i = 1; i < 25; i++) {
+    for (int i = 1; i < 24; i++) {
         timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
-    }
+    };
+	
+	timeslots[24] = "23:00 - 00:00";
 
     timeslotComboBox = new JComboBox<>(timeslots);
 	timeslotComboBox.setBounds(210, 110, 300, 100);
