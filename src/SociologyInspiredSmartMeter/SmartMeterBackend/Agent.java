@@ -1,10 +1,11 @@
 package SociologyInspiredSmartMeter.SmartMeterBackend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-class Agent {
+class Agent implements Serializable{
     // Unique identifier for the agent.
     int agentID;
 

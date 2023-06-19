@@ -1,7 +1,12 @@
 package SociologyInspiredSmartMeter.SmartMeterBackend;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -61,46 +66,70 @@ class SimulationRun {
             int run
     ) throws IOException {
 
-        // List of all the Agents that are part of the current simulation.
-        ArrayList<Agent> agents = new ArrayList<>();
+        ArrayList<Agent> agents;
 
-        // Create the Agents for the simulation.
-        for (int agentNumber = 1; agentNumber <= populationSize; agentNumber++) {
-                /*
-                 * This is the constructor for Agent objects.
-                 *
-                 * @param agentID This is an integer value that is unique to the individual agent and used to identify
-                 *                it to others in the ExchangeArena.
-                 * @param agentType Integer value denoting the agent type, and thus how it will behave.
-                 * @param slotsPerAgent Integer value representing the number of time slots each agent requires.
-                 * @param agents Array List of all the agents that exist in the current simulation.
-                 * @param socialCapital determines whether the agent uses socialCapital.
-                 */
-                new Agent(
-                        agentNumber,
-                        agentTypes[agentNumber % agentTypes.length],
-                        slotsPerAgent,
-                        agents,
-                        socialCapital
-                );
+        try {
+            System.out.println("Reading in agents from file.");
+            // Read in the population of agents from a file.
+            FileInputStream fileIn = new FileInputStream("agents.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            agents = (ArrayList<Agent>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Agents file not found, creating new agents.");
+            // List of all the Agents that are part of the current simulation.
+            agents = new ArrayList<>();
+
+            // Create the Agents for the simulation.
+                for (int agentNumber = 1; agentNumber <= populationSize; agentNumber++) {
+                        /*
+                        * This is the constructor for Agent objects.
+                        *
+                        * @param agentID This is an integer value that is unique to the individual agent and used to identify
+                        *                it to others in the ExchangeArena.
+                        * @param agentType Integer value denoting the agent type, and thus how it will behave.
+                        * @param slotsPerAgent Integer value representing the number of time slots each agent requires.
+                        * @param agents Array List of all the agents that exist in the current simulation.
+                        * @param socialCapital determines whether the agent uses socialCapital.
+                        */
+                        new Agent(
+                                agentNumber,
+                                agentTypes[agentNumber % agentTypes.length],
+                                slotsPerAgent,
+                                agents,
+                                socialCapital
+                        );
+            }
+
+            // Set all agents to a single type, used for establishing baseline performance.
+            if (singleAgentType && selectedSingleAgentType != 0) {                    
+                for (Agent a: agents) {
+                        a.setType(selectedSingleAgentType);
+                }                
+            }   
+
+            // Initialise each Agents relations with each other Agent.
+            for (Agent a : agents) {
+                a.initializeFavoursStore(agents);
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Agent class was not found.");
+            return;
+        } catch (IOException e) {
+            System.out.println("Error reading from file.");
+            return;
+        } catch (Exception e) {
+            System.out.println("Unhandled exception.");
+            return;
         }
+
         Collections.shuffle(agents, SmartMeterBackend.random);
 
-        // Set all agents to a single type, used for establishing baseline performance.
-        if (singleAgentType && selectedSingleAgentType != 0) {
-            for (Agent a: agents) {
-                a.setType(selectedSingleAgentType);
-            }
-        }   
-        
         // Increment the simulations seed each run.
         SmartMeterBackend.seed++;
         SmartMeterBackend.random.setSeed(SmartMeterBackend.seed);
-
-        // Initialise each Agents relations with each other Agent.
-        for (Agent a : agents) {
-            a.initializeFavoursStore(agents);
-        }
 
         boolean complete = false;
         boolean takeover = false;
@@ -212,6 +241,18 @@ class SimulationRun {
                 finalData.add(current.optimumAllocations);
                 finalData.add(1.0);
                 keyDaysData.add(finalData);
+            }
+
+            //Save the Population to file for the next day.
+            try {
+                FileOutputStream fileOut = new FileOutputStream("agents.ser");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(agents);
+                out.close();
+                fileOut.close();
+                System.out.println("Serialized data is saved in agents.ser");
+            } catch (IOException i) {
+                i.printStackTrace();
             }
             day++;   
         }

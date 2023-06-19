@@ -3,6 +3,7 @@ package SociologyInspiredSmartMeter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
@@ -15,6 +16,18 @@ import SociologyInspiredSmartMeter.SmartMeterClient.SettingsPage;
 import SociologyInspiredSmartMeter.SmartMeterClient.StatisticsPage;
 
 public class Controller {
+
+	//TODO: Write a method that is executed at run time that will read in the settings from the settings file
+	//Store those settings in the settings object.
+
+	//TODO: Write a method that is executed at run time that will attempt to read in an existing agent population
+	//If the agent population does not exist, create a new one and store it in the controller object.
+	
+	//TODO: Write a method to create a new agent population including the agent that will be used by the user.
+	//Store the agent population in the controller object.
+
+	//TODO: Write a method to save the agent population to a file that can be executed.
+	//This method should be executed when the application is closed.
 
 	/*
 	 * Config and Settings are used to store the configuration and settings of the application.
@@ -221,4 +234,12 @@ public class Controller {
 		displayPreferenceTimelinePage();
 		status = "Selected";
 	}
+
+	public void saveAgentPopulation()
+	{
+
+		
+
+	}
+
 }
