@@ -4,7 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Random;
+
+import SociologyInspiredSmartMeter.Controller;
 
 public class Day {
     // List of all the possible allocations that exist in the current simulation.
@@ -65,7 +68,8 @@ public class Day {
         FileWriter dailyDataWriter,
         FileWriter perAgentDataCSVWriter,
         FileWriter eachRoundDataCSVWriter,
-        int run
+        int run,
+        Controller controller
     ) throws IOException {
 
         if(!availableTimeSlots.isEmpty()) {
@@ -90,7 +94,6 @@ public class Day {
             availableTimeSlots.add(timeSlot);
         }
 
-
         // Agents start the day by requesting and receiving an allocation of time slots.
         Collections.shuffle(agents, SmartMeterBackend.random);
         ArrayList<Integer> curves = new ArrayList<>();
@@ -110,13 +113,22 @@ public class Day {
             int selector = curves.remove(0);
 
             //If the agentID is equal to the one we are tracking, update the requested timeslot variable
-            //to the requested timeslots of the agent on the client side, otherwise, use the default.
+            //to the requested timeslots of the agent on the client side, otherwise,
+            //allow the algorithm to generate the requested timeslots at random.
+            ArrayList<Integer> requestedTimeSlots = new ArrayList<Integer>();
 
-            ArrayList<Integer> requestedTimeSlots;
-
-            if(a.agentID == ) //Agent ID of the one that we are tracking
+            if(a.agentID == controller.getTrackedAgentID()) //Agent ID of the one that we are tracking
             {
-                requestedTimeSlots = ; //Timeslots from the user interface
+
+                for (Map.Entry<Integer, String> passedTimeslotstimeslots : controller.getTimeslotPreferences().entrySet()) {
+                    int key = passedTimeslotstimeslots.getKey();
+                    
+                    requestedTimeSlots.add(key);
+
+                }
+
+            a.requestedTimeSlots = requestedTimeSlots;
+
             } else
             {
                 requestedTimeSlots = a.requestTimeSlots(demandCurves[selector], totalDemandValues[selector]);
@@ -181,6 +193,19 @@ public class Day {
             } else if (a.getAgentType() == SmartMeterBackend.SELFISH) {
                 selPop++;
             }
+        }
+
+        for (Agent a : agents) {
+            if(a.agentID == controller.trackedAgentID)
+            {
+                try {
+                    Thread.sleep(5000);
+                    controller.setTimeslotAssignments(a.publishAllocatedTimeSlots());
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }    
         }
 
         socSat = CalculateSatisfaction.averageAgentSatisfaction(agents, SmartMeterBackend.SOCIAL);
@@ -257,7 +282,6 @@ public class Day {
         dailyDataWriter.append(String.valueOf(optimumAllocations));
         dailyDataWriter.append("\n");
 
-
         for (Agent a: agents) {
             perAgentDataCSVWriter.append(String.valueOf(run));
             perAgentDataCSVWriter.append(",");
@@ -306,6 +330,7 @@ public class Day {
          *                               the end of each day.
          */
         new SocialLearning(agents, slotsPerAgent, numberOfAgentsToEvolve);
+
     }
 
     /**

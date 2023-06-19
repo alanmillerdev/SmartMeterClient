@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+import SociologyInspiredSmartMeter.Controller;
+
 public class ArenaEnvironment {
     // Data that is collected over simulation runs is held within the arenaEnvironment.
     ArrayList<ArrayList<Double>> keyDaysData = new ArrayList<>();
@@ -51,7 +53,8 @@ public class ArenaEnvironment {
             int numberOfAgentsToEvolve,
             int[] agentTypes,
             boolean singleAgentType,
-            int selectedSingleAgentType
+            int selectedSingleAgentType,
+            Controller controller
     ) throws IOException {
 
         System.out.println("Starting simulation...");
@@ -303,7 +306,8 @@ public class ArenaEnvironment {
                     allDailyDataCSVWriter,
                     perAgentDataCSVWriter,
                     eachRoundDataCSVWriter,
-                    simulationRun
+                    simulationRun,
+                    controller
             );
             System.out.println("RUNS COMPLETED: " + simulationRun);
         }

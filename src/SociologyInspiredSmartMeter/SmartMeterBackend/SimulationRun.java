@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import SociologyInspiredSmartMeter.Controller;
+
 class SimulationRun {
     /**
      * Each Simulation run with the same parameters runs as an isolated instance although data is recorded in a single
@@ -63,7 +65,8 @@ class SimulationRun {
             FileWriter dailyDataWriter,
             FileWriter perAgentDataCSVWriter,
             FileWriter eachRoundDataCSVWriter,
-            int run
+            int run,
+            Controller controller
     ) throws IOException {
 
         ArrayList<Agent> agents;
@@ -179,7 +182,8 @@ class SimulationRun {
                 dailyDataWriter,
                 perAgentDataCSVWriter,
                 eachRoundDataCSVWriter,
-                run
+                run,
+                controller
             );
 
             if (((current.selPop == 0 || current.socPop == 0) || numberOfAgentsToEvolve == 0) && !takeover) {

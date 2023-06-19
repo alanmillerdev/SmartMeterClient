@@ -512,7 +512,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		
 	String[] timeslots = new String[25];
 	timeslots[0] = "Select a timeslot";
-    for (int i = 1; i < 24; i++) {
+    for (int i = 1; i < 25; i++) {
         timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
     };
 	

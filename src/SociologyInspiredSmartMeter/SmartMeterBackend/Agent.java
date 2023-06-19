@@ -14,7 +14,7 @@ class Agent implements Serializable{
     private final boolean usesSocialCapital;
     private boolean madeInteraction;
     private final int numberOfTimeSlotsWanted;
-    private ArrayList<Integer> requestedTimeSlots = new ArrayList<>();
+    ArrayList<Integer> requestedTimeSlots = new ArrayList<>();
     private ArrayList<Integer> allocatedTimeSlots = new ArrayList<>();
     private ArrayList<ArrayList<Integer>> favoursOwed = new ArrayList<>();
     private ArrayList<ArrayList<Integer>> favoursGiven = new ArrayList<>();

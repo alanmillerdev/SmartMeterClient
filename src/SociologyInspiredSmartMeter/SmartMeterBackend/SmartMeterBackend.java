@@ -9,13 +9,39 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
+import SociologyInspiredSmartMeter.Controller;
 import SociologyInspiredSmartMeter.SmartMeterBackend.parameters.UserParameters;
+import SociologyInspiredSmartMeter.SmartMeterClient.Settings;
+import SociologyInspiredSmartMeter.SmartMeterClient.Config;
 
 public class SmartMeterBackend extends UserParameters implements Runnable {
 
     // Create a single Random object for generating random numerical data for the simulation, a single object exists to
     // allow for result replication given a specific user seed.
     static Random random = new Random();
+
+     // Create a new controller object to store the passed controller object.
+        static Controller controller;
+
+        // Create a new config object to store the passed config object.
+        Config config;
+
+        // Create a new settings object to store the passed settings object.
+        Settings settings;
+
+    public void smartMeterSimulationRun(Controller passedController, Config passedConfig, Settings passedSettings)
+    {
+        // Store the passed controller object.
+        controller = passedController;
+
+        // Store the passed config object. 
+        config = passedConfig;
+
+        // Store the passed settings object.
+        settings = passedSettings;
+
+        run();
+    }
 
      @Override
      public void run() {
@@ -237,7 +263,8 @@ public class SmartMeterBackend extends UserParameters implements Runnable {
                         numberOfLearningAgents[i],
                         AGENT_TYPES,
                         SINGLE_AGENT_TYPE,
-                        SELECTED_SINGLE_AGENT_TYPE
+                        SELECTED_SINGLE_AGENT_TYPE,
+                        controller
                 );
 
                 simVersionsCompleted++;

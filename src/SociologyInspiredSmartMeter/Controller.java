@@ -74,6 +74,8 @@ public class Controller {
 
 	public HashMap<Integer, String> timeslotPreferences = new HashMap<Integer, String>();
 
+	public ArrayList<Integer> timeslotAssignments = new ArrayList<Integer>();
+
 	public int trackedAgentID = 1;
 
 	public Controller() {
@@ -83,7 +85,7 @@ public class Controller {
 
 		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
 		settings.setAgentMode("Social");
-		settings.setApplicationMode("Appliance");
+		settings.setApplicationMode("Generic");
 
 	}
 
@@ -93,8 +95,6 @@ public class Controller {
 	public void startUp() {
 
 		displayHomePage();
-
-		backend.run();
 	
 	}
 
@@ -231,11 +231,44 @@ public class Controller {
 
 	public void PreferenceSubmissionHandler(HashMap<Integer, String> timeslotPreferences)
 	{
-		this.timeslotPreferences = timeslotPreferences;
 		displayPreferenceTimelinePage();
 		status = "Selected";
+		this.timeslotPreferences = timeslotPreferences;
+		backend.smartMeterSimulationRun(this, config, settings);
+		System.out.println("Timeslots Submitted");
 	}
 
-	
+	//getter and setter for the timeslot preferences
+	public HashMap<Integer, String> getTimeslotPreferences()
+	{
+		return timeslotPreferences;
+	}
+
+	public void setTimeslotPreferences(HashMap<Integer, String> timeslotPreferences)
+	{
+		this.timeslotPreferences = timeslotPreferences;
+	}
+
+	//getter and setter for the tracked agent ID
+	public int getTrackedAgentID()
+	{
+		return trackedAgentID;
+	}
+
+	public void setTrackedAgentID(int trackedAgentID)
+	{
+		this.trackedAgentID = trackedAgentID;
+	}
+
+	//getter and setter for the timeslot assignments
+	public ArrayList<Integer> getTimeslotAssignments()
+	{
+		return timeslotAssignments;
+	}
+
+	public void setTimeslotAssignments(ArrayList<Integer> timeslotAssignments)
+	{
+		this.timeslotAssignments = timeslotAssignments;
+	}
 
 }
