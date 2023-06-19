@@ -108,7 +108,20 @@ public class Day {
         for (Agent a : agents) {
             a.resetDailyTracking();
             int selector = curves.remove(0);
-            ArrayList<Integer> requestedTimeSlots = a.requestTimeSlots(demandCurves[selector], totalDemandValues[selector]);
+
+            //If the agentID is equal to the one we are tracking, update the requested timeslot variable
+            //to the requested timeslots of the agent on the client side, otherwise, use the default.
+
+            ArrayList<Integer> requestedTimeSlots;
+
+            if(a.agentID == ) //Agent ID of the one that we are tracking
+            {
+                requestedTimeSlots = ; //Timeslots from the user interface
+            } else
+            {
+                requestedTimeSlots = a.requestTimeSlots(demandCurves[selector], totalDemandValues[selector]);
+            }
+
             ArrayList<Integer> allocatedTimeSlots = getRandomInitialAllocation(requestedTimeSlots);
             a.receiveAllocatedTimeSlots(allocatedTimeSlots);
         }

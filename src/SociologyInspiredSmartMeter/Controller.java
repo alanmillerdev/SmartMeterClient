@@ -72,8 +72,9 @@ public class Controller {
 	 */
 	public String status;
 
-
 	public HashMap<Integer, String> timeslotPreferences = new HashMap<Integer, String>();
+
+	public int trackedAgentID = 1;
 
 	public Controller() {
 
@@ -92,9 +93,9 @@ public class Controller {
 	public void startUp() {
 
 		displayHomePage();
-		
-		backend.run();
 
+		backend.run();
+	
 	}
 
 	/*
@@ -235,11 +236,6 @@ public class Controller {
 		status = "Selected";
 	}
 
-	public void saveAgentPopulation()
-	{
-
-		
-
-	}
+	
 
 }
