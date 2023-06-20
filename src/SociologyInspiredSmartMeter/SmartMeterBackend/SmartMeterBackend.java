@@ -14,7 +14,7 @@ import SociologyInspiredSmartMeter.SmartMeterBackend.parameters.UserParameters;
 import SociologyInspiredSmartMeter.SmartMeterClient.Settings;
 import SociologyInspiredSmartMeter.SmartMeterClient.Config;
 
-public class SmartMeterBackend extends UserParameters implements Runnable {
+public class SmartMeterBackend extends UserParameters {
 
     // Create a single Random object for generating random numerical data for the simulation, a single object exists to
     // allow for result replication given a specific user seed.
@@ -40,20 +40,17 @@ public class SmartMeterBackend extends UserParameters implements Runnable {
         // Store the passed settings object.
         settings = passedSettings;
 
-        run();
+        try {
+            Thread.sleep(5000);
+            headlessSimulation();
+        } catch (IOException ioe)
+        {
+
+        }catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
-     @Override
-     public void run() {
-         // TODO Auto-generated method stub
-            try {
-                headlessSimulation();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-     }
-     
     /**
      * This is the headlessSimulation method which runs a headless version of the ResourceExchangeArena simulation.
      * This can be used to run simulations to get results to compare with the GUI version.

@@ -198,13 +198,7 @@ public class Day {
         for (Agent a : agents) {
             if(a.agentID == controller.trackedAgentID)
             {
-                try {
-                    Thread.sleep(5000);
-                    controller.setTimeslotAssignments(a.publishAllocatedTimeSlots());
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                controller.setTimeslotAssignments(a.publishAllocatedTimeSlots());
             }    
         }
 

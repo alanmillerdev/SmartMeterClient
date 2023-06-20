@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPagePreferenceSelection;
@@ -74,7 +75,7 @@ public class Controller {
 
 	public HashMap<Integer, String> timeslotPreferences = new HashMap<Integer, String>();
 
-	public ArrayList<Integer> timeslotAssignments = new ArrayList<Integer>();
+	public HashMap<Integer, String> timeslotAssignments = new HashMap<Integer, String>();
 
 	public int trackedAgentID = 1;
 
@@ -85,7 +86,7 @@ public class Controller {
 
 		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
 		settings.setAgentMode("Social");
-		settings.setApplicationMode("Generic");
+		settings.setApplicationMode("Appliance");
 
 	}
 
@@ -97,6 +98,11 @@ public class Controller {
 		displayHomePage();
 	
 	}
+
+	Thread algorithmThread = new Thread(() -> {
+    SmartMeterBackend smartMeterBackend = new SmartMeterBackend();
+    smartMeterBackend.smartMeterSimulationRun(this, config, settings);
+	});
 
 	/*
 	 * displayHomePage() is called when the user clicks the home button.
@@ -231,11 +237,10 @@ public class Controller {
 
 	public void PreferenceSubmissionHandler(HashMap<Integer, String> timeslotPreferences)
 	{
-		displayPreferenceTimelinePage();
-		status = "Selected";
 		this.timeslotPreferences = timeslotPreferences;
-		backend.smartMeterSimulationRun(this, config, settings);
-		System.out.println("Timeslots Submitted");
+		status = "Selected";
+		displayPreferenceTimelinePage();
+		algorithmThread.start();
 	}
 
 	//getter and setter for the timeslot preferences
@@ -261,14 +266,24 @@ public class Controller {
 	}
 
 	//getter and setter for the timeslot assignments
-	public ArrayList<Integer> getTimeslotAssignments()
+	public HashMap<Integer, String> getTimeslotAssignments()
 	{
 		return timeslotAssignments;
 	}
 
-	public void setTimeslotAssignments(ArrayList<Integer> timeslotAssignments)
+	public void setTimeslotAssignments(ArrayList<Integer> assignedTimeslots)
 	{
-		this.timeslotAssignments = timeslotAssignments;
-	}
 
+		String assignment = "";
+		int timeslot = 0;
+		int i = 0;
+
+		for (Map.Entry<Integer, String> entry : timeslotPreferences.entrySet()) {
+			assignment = entry.getValue();
+			timeslot = assignedTimeslots.get(i);
+			timeslotAssignments.put(timeslot, assignment);
+			i++;
+		}
+		status = "Update";
+	}
 }

@@ -357,6 +357,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						return;
 					} else 
 					{
+						selectedAppliance = "Pointer";
 						//Adds the timeslot and the appliance to the timeslot preference list to be used in the algorithm and UI.
 						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
 						//Creates a string to be displayed in the UI.

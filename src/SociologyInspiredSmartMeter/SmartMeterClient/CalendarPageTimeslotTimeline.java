@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -30,6 +31,8 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 
 	private Settings settings;
 
+	String backgroundImagePath;
+
     public CalendarPageTimeslotTimeline(SociologyInspiredSmartMeter.Controller passedController, Config passedConfig, Settings passedSettings) {
 
 		this.controller = passedController;
@@ -42,7 +45,9 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 
 		staticElements();
 
-		timelineBuilder();
+		//Passes the timeline builder the y position of the upper timeline that displays
+		//the preference timeline.
+		timelineBuilder(197, controller.timeslotPreferences);
 
 		setContentPane(contentPane);
 
@@ -83,6 +88,16 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 			LocalDateTime now = LocalDateTime.now();
 			onScreenClock.setText(String.valueOf(myTime.format(now)));
 			announcementText.setText(controller.announcementHandler());
+			if(controller.status.equals("Update")) {
+				controller.status = "Assigned";
+				dispose();
+				buildFrame();
+				staticElements();
+				timelineBuilder(197, controller.timeslotPreferences);
+				timelineBuilder(397, controller.timeslotAssignments);
+				setContentPane(contentPane);
+				this.setVisible(true);
+			}
 		});
 
 		timer.setRepeats(true);
@@ -92,18 +107,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 		
 		// Static Images
 		// Background Image
-
-		JLabel backgroundImage;
-		try {
-			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/Background1Timeline.png"));
-			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
-			backgroundImage.setBounds(0, 0, 1400, 800);
-			contentPane.add(backgroundImage);
-			contentPane.setComponentZOrder(backgroundImage, 2);
-		} catch (IOException backgroundImageErr) {
-			System.out.println("Background Image unable to load");
-			System.exit(2);
-		}
+		backgroundHandler();
 
 		// Icon Images
 
@@ -258,26 +262,66 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 	public void staticElements()
 	{
 
-        //Static Label for the timeslot preference list.
-		JLabel preferenceListLabel = new JLabel("Timeslot Preference Timeline");
+        //Static Label for the preference timeslot list.
+		JLabel preferenceListLabel = new JLabel("Preference Timeslot Timeline");
 		preferenceListLabel.setBounds(500, 100, 500, 50);
 		preferenceListLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		contentPane.add(preferenceListLabel);
 		contentPane.setComponentZOrder(preferenceListLabel, 1);
 
+		if(controller.status.equals("Assigned"))
+		{
+		//Static Label for the assigned timeslot list.
+		JLabel assignedListLabel = new JLabel("Assigned Timeslot Timeline");
+		assignedListLabel.setBounds(500, 320, 500, 50);
+		assignedListLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		contentPane.add(assignedListLabel);
+		contentPane.setComponentZOrder(assignedListLabel, 1);
+		}
     }
 
-	public void timelineBuilder()
+	public void backgroundHandler()
+	{
+		JLabel backgroundImage;
+		if(controller.status.equals("Assigned"))
+		{
+		try {
+			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/Background2Timelines.png"));
+			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
+			backgroundImage.setBounds(0, 0, 1400, 800);
+			contentPane.add(backgroundImage);
+			contentPane.setComponentZOrder(backgroundImage, 2);
+		} catch (IOException backgroundImageErr) {
+			System.out.println("Background Image unable to load");
+			System.exit(2);
+		}
+		} else
+		{
+			try {
+			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/Background1Timeline.png"));
+			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
+			backgroundImage.setBounds(0, 0, 1400, 800);
+			contentPane.add(backgroundImage);
+			contentPane.setComponentZOrder(backgroundImage, 2);
+		} catch (IOException backgroundImageErr) {
+			System.out.println("Background Image unable to load");
+			System.exit(2);
+		}
+		}
+	}
+
+	public void timelineBuilder(int position, HashMap<Integer, String> timeslotPreferences)
 	{
 
 		ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineSmall.png");
 		ImageIcon tumbleDryerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerSmall.png");
 		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherSmall.png");
 		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterSmall.png");
+		ImageIcon pointerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/pointerSmall.png");
 
 		//For each timeslot in the preference list, create an icon and display it on the timeline.
 
-		controller.timeslotPreferences.forEach((key, value) -> {
+		timeslotPreferences.forEach((key, value) -> {
 
 			JLabel label;
 
@@ -295,6 +339,9 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				case "Heater":
 					label = new JLabel(heaterImage);
 					break;
+				case "Pointer":
+					label = new JLabel(pointerImage);
+					break;
 				default:
 					label = new JLabel(washingMachineImage);
 					break;
@@ -302,76 +349,80 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 
 			switch(key) {
 				case 0:
-					label.setBounds(62, 197, 32, 32);
+					label.setBounds(62, position, 32, 32);
+					break;
+					//Same as 0
+				case 24:
+					label.setBounds(62, position, 32, 32);
 					break;
 				case 1:
-					label.setBounds(112, 197, 32, 32);
+					label.setBounds(112, position, 32, 32);
 					break;
 				case 2:
-					label.setBounds(168, 197, 32, 32);
+					label.setBounds(168, position, 32, 32);
 					break;
 				case 3:
-					label.setBounds(222, 197, 32, 32);
+					label.setBounds(222, position, 32, 32);
 					break;
 				case 4:
-					label.setBounds(278, 197, 32, 32);
+					label.setBounds(278, position, 32, 32);
 					break;
 				case 5:
-					label.setBounds(330, 197, 32, 32);
+					label.setBounds(330, position, 32, 32);
 					break;
 				case 6:
-					label.setBounds(384, 197, 32, 32);
+					label.setBounds(384, position, 32, 32);
 					break;
 				case 7:
-					label.setBounds(440, 197, 32, 32);
+					label.setBounds(440, position, 32, 32);
 					break;
 				case 8:
-					label.setBounds(494, 197, 32, 32);
+					label.setBounds(494, position, 32, 32);
 					break;
 				case 9:
-					label.setBounds(548, 197, 32, 32);
+					label.setBounds(548, position, 32, 32);
 					break;
 				case 10:
-					label.setBounds(604, 197, 32, 32);
+					label.setBounds(604, position, 32, 32);
 					break;
 				case 11:
-					label.setBounds(655, 197, 32, 32);
+					label.setBounds(655, position, 32, 32);
 					break;
 				case 12:
-					label.setBounds(708, 197, 32, 32);
+					label.setBounds(708, position, 32, 32);
 					break;
 				case 13:
-					label.setBounds(762, 197, 32, 32);
+					label.setBounds(762, position, 32, 32);
 					break;
 				case 14:
-					label.setBounds(814, 197, 32, 32);
+					label.setBounds(814, position, 32, 32);
 					break;
 				case 15:
-					label.setBounds(866, 197, 32, 32);
+					label.setBounds(866, position, 32, 32);
 					break;
 				case 16:
-					label.setBounds(918, 197, 32, 32);
+					label.setBounds(918, position, 32, 32);
 					break;
 				case 17:
-					label.setBounds(972, 197, 32, 32);
+					label.setBounds(972, position, 32, 32);
 					break;
 				case 18:
-					label.setBounds(1025, 197, 32, 32);
+					label.setBounds(1025, position, 32, 32);
 					break;
 				case 19:
-					label.setBounds(1078, 197, 32, 32);
+					label.setBounds(1078, position, 32, 32);
 					break;
 				case 20:
-					label.setBounds(1130, 197, 32, 32);
+					label.setBounds(1130, position, 32, 32);
 					break;
 				case 21:
-					label.setBounds(1184, 197, 32, 32);
+					label.setBounds(1184, position, 32, 32);
 					break;
 				case 22:
-					label.setBounds(1240, 197, 32, 32);
+					label.setBounds(1240, position, 32, 32);
 					break;
 				case 23:
-					label.setBounds(1290, 197, 32, 32);
+					label.setBounds(1290, position, 32, 32);
 					break;
 				default:
 					// code block
