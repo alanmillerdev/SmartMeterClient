@@ -277,6 +277,23 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 		assignedListLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		contentPane.add(assignedListLabel);
 		contentPane.setComponentZOrder(assignedListLabel, 1);
+
+		//Button to navigate to the exchange information page
+		JButton btnExchangeInformation = new JButton("Exchange Information");
+		btnExchangeInformation.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				controller.displayExchangeInformationPage();
+
+			}
+		});
+		btnExchangeInformation.setBounds(500, 600, 400, 50);
+		btnExchangeInformation.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		contentPane.add(btnExchangeInformation);
+		contentPane.setComponentZOrder(btnExchangeInformation, 1);
+
 		}
     }
 

@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import SociologyInspiredSmartMeter.SmartMeterBackend.SmartMeterBackend;
+import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageAssignedTimeslots;
+import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageExchangeInformation;
+import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageFeedback;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPagePreferenceSelection;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageTimeslotTimeline;
 import SociologyInspiredSmartMeter.SmartMeterClient.Config;
@@ -64,9 +67,19 @@ public class Controller {
 	CalendarPageTimeslotTimeline preferenceTimelinePage;
 
 	/*
+	 * The exchange information page shows the user how their timeslots have been obtained.
+	 */
+	CalendarPageExchangeInformation displayExchangeInformationPage;
+
+	/*
+	 * The feedback page allows the user to provide feedback on their experience.
+	 */
+	CalendarPageFeedback feedbackPage;
+
+	/*
 	 * The assigned timeline page shows the user the timeslots that have been assigned to them.
 	 */
-	CalendarPageTimeslotTimeline displayAssignedTimelinePage;
+	CalendarPageAssignedTimeslots assignedTimelinePage;
 
 	/*
 	 * Status is used to determine what the announcement should be
@@ -125,9 +138,17 @@ public class Controller {
 	 */
 	public void displayCalendarPage()
 	{
-
-		calendarPagePreferenceSelection = new CalendarPagePreferenceSelection(this, config, settings);
-
+		if(timeslotPreferences.isEmpty())
+		{
+			calendarPagePreferenceSelection = new CalendarPagePreferenceSelection(this, config, settings);
+		} else if (!timeslotPreferences.isEmpty() && timeslotAssignments.isEmpty())
+		{
+			displayPreferenceTimelinePage();
+		} else if (!timeslotAssignments.isEmpty())
+		{
+			status = "Update";
+			displayPreferenceTimelinePage();
+		}
 	}
 
 	public void displayPreferenceTimelinePage()
@@ -137,9 +158,11 @@ public class Controller {
 
 	}
 
-	public void displayAssignedTimelinePage()
+	public void displayExchangeInformationPage()
 	{
-		displayAssignedTimelinePage = new CalendarPageTimeslotTimeline(this, config, settings);
+
+		displayExchangeInformationPage = new CalendarPageExchangeInformation(this, config, settings);
+
 	}
 
 	/*
@@ -148,6 +171,19 @@ public class Controller {
 	public void displaySettingsPage()
 	{
 	 	settingsPage = new SettingsPage(this, config, settings);
+	}
+
+	/*
+	 * displayFeedbackPage() is called when the user clicks the feedback button.
+	 */
+	public void displayFeedbackPage()
+	{
+		feedbackPage = new CalendarPageFeedback(this, config, settings);
+	}
+
+	public void displayAssignedTimelinePage()
+	{
+		assignedTimelinePage = new CalendarPageAssignedTimeslots(this, config, settings);
 	}
 
 	/*
@@ -168,31 +204,6 @@ public class Controller {
 				announcement = "Please Select your Timeslots for Today!";
 				break;
 
-			case "Selecting4":
-				
-				announcement = "Please Select 4 more timeslots!";
-				break;
-			
-			case "Selecting3":
-				
-				announcement = "Please Select 3 more timeslots!";
-				break;
-
-			case "Selecting2":
-				
-				announcement = "Please Select 2 more timeslots!";
-				break;
-
-			case "Selecting1":
-				
-				announcement = "Please Select 1 more timeslot!";
-				break;
-
-			case "selecting0":
-				
-				announcement = "Please Submit your Timeslots!";
-				break;
-
 			case "Selected":
 
 				announcement = "Timeslots will be assigned shortly!";
@@ -202,9 +213,18 @@ public class Controller {
 
 				announcement = "Timeslots have been assigned!";
 				break;
+			case "Exchange":
 
+				announcement = "View your timeslot exchange information!";
+				break;
+				
 			case "Feedback":
 				announcement = "Please provide feedback on your assigned timeslots!";
+				break;
+
+			case "Submitted":
+
+				announcement = "Thank you for your feedback! See you tomorrow!";
 				break;
 			
 			default:
@@ -284,6 +304,7 @@ public class Controller {
 			timeslotAssignments.put(timeslot, assignment);
 			i++;
 		}
+		 
 		status = "Update";
 	}
 }
