@@ -391,6 +391,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 				{
 				//If the user has selected 4 timeslots, submit the 4 timeslots to the controller.
 				//Dispose of the current page.
+				controller.status = "Selected";
 				dispose();
 				//Call the controller to handle next steps.
 				controller.PreferenceSubmissionHandler(timeslotPreferences);
@@ -421,10 +422,10 @@ public class CalendarPagePreferenceSelection extends JFrame{
 	public void ApplicanceTimeslotSelectionUI()
 	{
 		
-		ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washing-machine.png");
-		ImageIcon tumbleDryeerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumble-dryer.png");
-		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasher.png");
-		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heat-pump.png");
+		ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineLarge.png");
+		ImageIcon tumbleDryeerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerLarge.png");
+		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherLarge.png");
+		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterLarge.png");
 
 		JToggleButton washingMachineButton = new JToggleButton(washingMachineImage);
 		JToggleButton tumbleDryerButton = new JToggleButton(tumbleDryeerImage);

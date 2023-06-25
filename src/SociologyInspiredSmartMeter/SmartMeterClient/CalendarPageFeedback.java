@@ -1,5 +1,6 @@
 package SociologyInspiredSmartMeter.SmartMeterClient;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 import SociologyInspiredSmartMeter.Controller;
 
@@ -49,6 +51,8 @@ public class CalendarPageFeedback extends JFrame{
 		buildFrame();
 
 		staticElements();
+
+		feedbackElements();
 
         setContentPane(contentPane);
 
@@ -287,7 +291,7 @@ public class CalendarPageFeedback extends JFrame{
                 controller.status = "Submitted";
                 dispose();
                 controller.displayAssignedTimelinePage();
-
+				
             }
         });
         btnFeedback.setBounds(500, 600, 400, 50);
@@ -295,6 +299,114 @@ public class CalendarPageFeedback extends JFrame{
         contentPane.add(btnFeedback);
         contentPane.setComponentZOrder(btnFeedback, 1);
 
+
+
     }
+
+	public void feedbackElements()
+	{
+
+		ImageIcon thumbUp = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbUp.png");
+		ImageIcon thumbSide = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbSide.png");
+		ImageIcon thumbDown = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbDown.png");
+		ImageIcon metricOneIcon = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineMedium.png");
+		ImageIcon metricTwoIcon = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerMedium.png");
+		ImageIcon metricThreeIcon = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherMedium.png");
+
+		//Metric 1
+		//Metric Icon
+		JLabel metric1Icon = new JLabel(metricOneIcon);
+		metric1Icon.setBounds(460, 220, 64, 64);
+		contentPane.add(metric1Icon);
+		contentPane.setComponentZOrder(metric1Icon, 1);
+		
+		JLabel metric1Label = new JLabel("Metric One");
+		metric1Label.setBounds(420, 290, 200, 50);
+		metric1Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		contentPane.add(metric1Label);
+		contentPane.setComponentZOrder(metric1Label, 1);
+
+		ButtonGroup metric1Group = new ButtonGroup();
+        JToggleButton metric1ThumbsUp = new JToggleButton(thumbUp);
+        JToggleButton metric1ThumbsSide = new JToggleButton(thumbSide);
+        JToggleButton metric1ThumbsDown = new JToggleButton(thumbDown);
+        metric1Group.add(metric1ThumbsUp);
+        metric1Group.add(metric1ThumbsSide);
+        metric1Group.add(metric1ThumbsDown);
+
+		metric1ThumbsUp.setBounds(460, 350, 64, 64);
+		metric1ThumbsSide.setBounds(460, 430, 64, 64);
+		metric1ThumbsDown.setBounds(460, 510, 64, 64);
+		contentPane.add(metric1ThumbsUp);
+		contentPane.add(metric1ThumbsSide);
+		contentPane.add(metric1ThumbsDown);
+		contentPane.setComponentZOrder(metric1ThumbsUp, 1);
+		contentPane.setComponentZOrder(metric1ThumbsSide, 1);
+		contentPane.setComponentZOrder(metric1ThumbsDown, 1);
+
+		// Metric 2
+		// Metric Icon
+		JLabel metric2Icon = new JLabel(metricTwoIcon);
+		metric2Icon.setBounds(660, 220, 64, 64);
+		contentPane.add(metric2Icon);
+		contentPane.setComponentZOrder(metric2Icon, 1);
+
+		JLabel metric2Label = new JLabel("Metric Two");
+		metric2Label.setBounds(620, 290, 200, 50);
+		metric2Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		contentPane.add(metric2Label);
+		contentPane.setComponentZOrder(metric2Label, 1);
+
+		ButtonGroup metric2Group = new ButtonGroup();
+		JToggleButton metric2ThumbsUp = new JToggleButton(thumbUp);
+		JToggleButton metric2ThumbsSide = new JToggleButton(thumbSide);
+		JToggleButton metric2ThumbsDown = new JToggleButton(thumbDown);
+		metric2Group.add(metric2ThumbsUp);
+		metric2Group.add(metric2ThumbsSide);
+		metric2Group.add(metric2ThumbsDown);
+		
+		
+
+		metric2ThumbsUp.setBounds(660, 350, 64, 64);
+		metric2ThumbsSide.setBounds(660, 430, 64, 64);
+		metric2ThumbsDown.setBounds(660, 510, 64, 64);
+		contentPane.add(metric2ThumbsUp);
+		contentPane.add(metric2ThumbsSide);
+		contentPane.add(metric2ThumbsDown);
+		contentPane.setComponentZOrder(metric2ThumbsUp, 1);
+		contentPane.setComponentZOrder(metric2ThumbsSide, 1);
+		contentPane.setComponentZOrder(metric2ThumbsDown, 1);
+
+		// Metric 3
+		// Metric Icon
+		JLabel metric3Icon = new JLabel(metricThreeIcon);
+		metric3Icon.setBounds(860, 220, 64, 64);
+		contentPane.add(metric3Icon);
+		contentPane.setComponentZOrder(metric3Icon, 1);
+
+		JLabel metric3Label = new JLabel("Metric Three");
+		metric3Label.setBounds(820, 290, 200, 50);
+		metric3Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		contentPane.add(metric3Label);
+		contentPane.setComponentZOrder(metric3Label, 1);
+
+		ButtonGroup metric3Group = new ButtonGroup();
+		JToggleButton metric3ThumbsUp = new JToggleButton(thumbUp);
+		JToggleButton metric3ThumbsSide = new JToggleButton(thumbSide);
+		JToggleButton metric3ThumbsDown = new JToggleButton(thumbDown);
+		metric3Group.add(metric3ThumbsUp);
+		metric3Group.add(metric3ThumbsSide);
+		metric3Group.add(metric3ThumbsDown);
+
+		metric3ThumbsUp.setBounds(860, 350, 64, 64);
+		metric3ThumbsSide.setBounds(860, 430, 64, 64);
+		metric3ThumbsDown.setBounds(860, 510, 64, 64);
+		contentPane.add(metric3ThumbsUp);
+		contentPane.add(metric3ThumbsSide);
+		contentPane.add(metric3ThumbsDown);
+		contentPane.setComponentZOrder(metric3ThumbsUp, 1);
+		contentPane.setComponentZOrder(metric3ThumbsSide, 1);
+		contentPane.setComponentZOrder(metric3ThumbsDown, 1);
+	}
 
 }

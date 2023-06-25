@@ -198,8 +198,6 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
-					revalidate();
-					repaint();
 
 				}
 			});
@@ -407,6 +405,12 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 
     public void nextTimeslotHandler()
     {
+
+        ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineMedium.png");
+		ImageIcon tumbleDryerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerMedium.png");
+		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherMedium.png");
+		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterMedium.png");
+
         JLabel nextTimeslotLabel = new JLabel("");
 
         LocalTime currentTime = LocalTime.now();
@@ -422,23 +426,57 @@ public class CalendarPageAssignedTimeslots extends JFrame{
             }
         }
 
+        JLabel iconJLabel;
+
+        switch(applianceName)
+		{
+			case "Washing Machine":
+            	iconJLabel = new JLabel(washingMachineImage);
+			break;
+			case "Tumble Dryer":
+			 	iconJLabel = new JLabel(tumbleDryerImage);
+				break;
+			case "Dishwasher":
+				iconJLabel = new JLabel(dishwasherImage);
+				break;
+    		case "Heater":
+				iconJLabel = new JLabel(heaterImage);
+			break;
+			default:
+              iconJLabel = new JLabel("N/A");
+			break;
+		}
+
         if(settings.getApplicationMode().equals("Appliance"))
         {  
             if (nextTimeslot != null) {
             // handle case where there is a next timeslot
+            //Icon
+            iconJLabel.setBounds(430, 380, 64, 64);
+            contentPane.add(iconJLabel);
+            contentPane.setComponentZOrder(iconJLabel, 1);
+
+            //Timeslot Text
             nextTimeslotLabel.setText(applianceName + " at " + nextTimeslot.toString() + " - " + nextTimeslot.plusHours(1).toString());
+            nextTimeslotLabel.setBounds(500, 388, 500, 50);
             } else {
                 // handle case where there are no more assigned timeslots for the day
                 nextTimeslotLabel.setText("No more timeslots today");
+                nextTimeslotLabel.setBounds(500, 400, 500, 50);
             }
-
-            nextTimeslotLabel.setBounds(600, 400, 500, 50);
             nextTimeslotLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
             contentPane.add(nextTimeslotLabel);
             contentPane.setComponentZOrder(nextTimeslotLabel, 1);
         }else if(settings.getApplicationMode().equals("Generic"))
         {
-            nextTimeslotLabel.setBounds(500, 400, 500, 50);
+            if (nextTimeslot != null) {
+            // handle case where there is a next timeslot
+                nextTimeslotLabel.setText("1 kWh available at " + nextTimeslot.toString() + " - " + nextTimeslot.plusHours(1).toString());
+            } else {
+                // handle case where there are no more assigned timeslots for the day
+                nextTimeslotLabel.setText("No more timeslots today");
+            }
+            nextTimeslotLabel.setBounds(480, 350, 500, 50);
             nextTimeslotLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
             contentPane.add(nextTimeslotLabel);
             contentPane.setComponentZOrder(nextTimeslotLabel, 1);

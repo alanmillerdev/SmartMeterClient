@@ -1,6 +1,5 @@
 package SociologyInspiredSmartMeter;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,15 +22,6 @@ public class Controller {
 
 	//TODO: Write a method that is executed at run time that will read in the settings from the settings file
 	//Store those settings in the settings object.
-
-	//TODO: Write a method that is executed at run time that will attempt to read in an existing agent population
-	//If the agent population does not exist, create a new one and store it in the controller object.
-	
-	//TODO: Write a method to create a new agent population including the agent that will be used by the user.
-	//Store the agent population in the controller object.
-
-	//TODO: Write a method to save the agent population to a file that can be executed.
-	//This method should be executed when the application is closed.
 
 	/*
 	 * Config and Settings are used to store the configuration and settings of the application.
@@ -98,8 +88,8 @@ public class Controller {
 		status = "Select";
 
 		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
-		settings.setAgentMode("Social");
-		settings.setApplicationMode("Appliance");
+		settings.setAgentMode("Selfish");
+		settings.setApplicationMode("Generic");
 
 	}
 
@@ -144,10 +134,18 @@ public class Controller {
 		} else if (!timeslotPreferences.isEmpty() && timeslotAssignments.isEmpty())
 		{
 			displayPreferenceTimelinePage();
-		} else if (!timeslotAssignments.isEmpty())
+		} else if (!timeslotAssignments.isEmpty() && (status.equals("Update") || status.equals("Assigned")))
 		{
-			status = "Update";
 			displayPreferenceTimelinePage();
+		} else if (status.equals("Exchange"))
+		{
+			displayExchangeInformationPage();
+		} else if (status.equals("Feedback"))
+		{
+			displayFeedbackPage();
+		} else if (status.equals("Submitted"))
+		{
+			displayAssignedTimelinePage();
 		}
 	}
 
@@ -213,8 +211,14 @@ public class Controller {
 
 				announcement = "Timeslots have been assigned!";
 				break;
-			case "Exchange":
+	
+			//Duplicate Message to allow for the "Update" status to be used to update the user interface.
+			case "Update":
+		
+				announcement = "Timeslots have been assigned!";
+				break;
 
+			case "Exchange":
 				announcement = "View your timeslot exchange information!";
 				break;
 				
@@ -304,7 +308,17 @@ public class Controller {
 			timeslotAssignments.put(timeslot, assignment);
 			i++;
 		}
-		 
 		status = "Update";
+	}
+
+	//getter and setter for the agent mode
+	public String getAgentMode()
+	{
+		return settings.getAgentMode();
+	}
+
+	public void setAgentMode(String agentMode)
+	{
+		settings.setAgentMode(agentMode);
 	}
 }

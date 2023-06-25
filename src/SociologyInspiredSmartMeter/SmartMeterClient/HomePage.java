@@ -70,7 +70,6 @@ public class HomePage extends JFrame {
 		onScreenClock.setBounds(1260, 45, 200, 32);
 		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 32));
 		
-
 		Timer timer = new Timer(1000, (ActionEvent e) -> {
 			DateTimeFormatter myTime = DateTimeFormatter.ofPattern("HH:mm");
 			LocalDateTime now = LocalDateTime.now();

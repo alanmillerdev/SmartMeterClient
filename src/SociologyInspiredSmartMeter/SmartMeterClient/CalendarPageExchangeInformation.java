@@ -54,8 +54,6 @@ public class CalendarPageExchangeInformation extends JFrame{
 
 		setContentPane(contentPane);
 
-        controller.status = "Feedback";
-
 		this.setVisible(true);
      
     }
@@ -281,6 +279,7 @@ public class CalendarPageExchangeInformation extends JFrame{
             @SuppressWarnings("deprecation")
             public void actionPerformed(ActionEvent e) {
 
+				controller.status = "Feedback";
                 dispose();
                 controller.displayFeedbackPage();
 
@@ -326,7 +325,7 @@ public class CalendarPageExchangeInformation extends JFrame{
 					label = new JLabel(pointerImage);
 					break;
 				default:
-					label = new JLabel(washingMachineImage);
+                    label = new JLabel(pointerImage);
 					break;
 			}
 

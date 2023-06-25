@@ -115,10 +115,23 @@ public class Day {
             //If the agentID is equal to the one we are tracking, update the requested timeslot variable
             //to the requested timeslots of the agent on the client side, otherwise,
             //allow the algorithm to generate the requested timeslots at random.
+
             ArrayList<Integer> requestedTimeSlots = new ArrayList<Integer>();
 
             if(a.agentID == controller.getTrackedAgentID()) //Agent ID of the one that we are tracking
             {
+
+                if(controller.getAgentMode().equals("Selfish"))
+                {
+                    
+                    a.setType(1);
+
+                } else if(controller.getAgentMode().equals("Social"))
+                {
+                    
+                    a.setType(2);
+
+                }
 
                 for (Map.Entry<Integer, String> passedTimeslotstimeslots : controller.getTimeslotPreferences().entrySet()) {
                     int key = passedTimeslotstimeslots.getKey();

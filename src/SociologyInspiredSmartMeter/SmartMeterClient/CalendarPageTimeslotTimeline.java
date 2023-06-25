@@ -33,6 +33,8 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 
 	String backgroundImagePath;
 
+	Timer timer;
+
     public CalendarPageTimeslotTimeline(SociologyInspiredSmartMeter.Controller passedController, Config passedConfig, Settings passedSettings) {
 
 		this.controller = passedController;
@@ -83,7 +85,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 		onScreenClock.setBounds(1260, 45, 200, 32);
 		onScreenClock.setFont(new Font("Serif", Font.PLAIN, 32));
 		
-		Timer timer = new Timer(1000, (ActionEvent e) -> {
+		timer = new Timer(1000, (ActionEvent e) -> {
 			DateTimeFormatter myTime = DateTimeFormatter.ofPattern("HH:mm");
 			LocalDateTime now = LocalDateTime.now();
 			onScreenClock.setText(String.valueOf(myTime.format(now)));
@@ -149,6 +151,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
+					timer.stop();
 					dispose();
 					controller.displayHomePage();
 
@@ -173,6 +176,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
+					timer.stop();
 					dispose();
 					controller.displaySettingsPage();
 
@@ -197,6 +201,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
+					timer.stop();
 					revalidate();
 					repaint();
 
@@ -221,6 +226,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
+					timer.stop();
 					dispose();
 					controller.displayCalendarPage();
 
@@ -245,6 +251,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 
+					timer.stop();
 					dispose();
 					controller.displayStatisticsPage();
 
@@ -283,7 +290,7 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 		btnExchangeInformation.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-
+				controller.status = "Exchange";
 				dispose();
 				controller.displayExchangeInformationPage();
 
