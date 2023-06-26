@@ -89,7 +89,7 @@ public class Controller {
 
 		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
 		settings.setAgentMode("Selfish");
-		settings.setApplicationMode("Generic");
+		settings.setApplicationMode("Appliance");
 
 	}
 

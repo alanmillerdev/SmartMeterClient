@@ -1,5 +1,6 @@
 package SociologyInspiredSmartMeter.SmartMeterClient;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 public class StatisticsPage extends JFrame{
 
@@ -43,19 +45,19 @@ public class StatisticsPage extends JFrame{
 
     public void buildFrame() {
 
-		setTitle(config.getFrameTitle());
+		setTitle("Smart Meter");
 
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(config.getViewXPos(), config.getViewYPos(), config.getViewWidth(), config.getViewHeight());
+		setBounds(0, 0, 1380, 800);
 
 		contentPane = new JPanel();
 
-		contentPane.setBorder(config.getBorder());
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		contentPane.setBackground(config.getBackgroundColour());
+		contentPane.setBackground(Color.WHITE);
 
 		contentPane.setLayout(null);
 
@@ -87,7 +89,7 @@ public class StatisticsPage extends JFrame{
 		// Background Image
 		JLabel backgroundImage;
 		try {
-			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/background.png"));
+			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/Background.png"));
 			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
 			backgroundImage.setBounds(0, 0, 1400, 800);
 			contentPane.add(backgroundImage);

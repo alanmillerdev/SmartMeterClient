@@ -1,5 +1,6 @@
 package SociologyInspiredSmartMeter.SmartMeterClient;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 public class CalendarPageTimeslotTimeline extends JFrame{
 
@@ -59,19 +61,19 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 
     public void buildFrame() {
 
-		setTitle(config.getFrameTitle());
+		setTitle("Smart Meter");
 
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(config.getViewXPos(), config.getViewYPos(), config.getViewWidth(), config.getViewHeight());
+		setBounds(0, 0, 1380, 800);
 
 		contentPane = new JPanel();
 
-		contentPane.setBorder(config.getBorder());
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		contentPane.setBackground(config.getBackgroundColour());
+		contentPane.setBackground(Color.WHITE);
 
 		contentPane.setLayout(null);
 

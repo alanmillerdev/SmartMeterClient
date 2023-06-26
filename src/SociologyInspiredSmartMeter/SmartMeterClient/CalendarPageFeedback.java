@@ -27,6 +27,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import SociologyInspiredSmartMeter.Controller;
 
@@ -62,19 +63,19 @@ public class CalendarPageFeedback extends JFrame{
 
     public void buildFrame() {
 
-		setTitle(config.getFrameTitle());
+		setTitle("Smart Meter");
 
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(config.getViewXPos(), config.getViewYPos(), config.getViewWidth(), config.getViewHeight());
+		setBounds(0, 0, 1380, 800);
 
 		contentPane = new JPanel();
 
-		contentPane.setBorder(config.getBorder());
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		contentPane.setBackground(config.getBackgroundColour());
+		contentPane.setBackground(Color.WHITE);
 
 		contentPane.setLayout(null);
 
