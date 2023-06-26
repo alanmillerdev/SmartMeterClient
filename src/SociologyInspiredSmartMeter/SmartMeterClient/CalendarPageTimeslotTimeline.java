@@ -91,8 +91,9 @@ public class CalendarPageTimeslotTimeline extends JFrame{
 			onScreenClock.setText(String.valueOf(myTime.format(now)));
 			announcementText.setText(controller.announcementHandler());
 			if(controller.status.equals("Update")) {
+				timer.stop();
 				controller.status = "Assigned";
-				dispose();
+				contentPane.removeAll();
 				buildFrame();
 				staticElements();
 				timelineBuilder(197, controller.timeslotPreferences);

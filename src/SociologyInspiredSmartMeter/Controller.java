@@ -136,6 +136,7 @@ public class Controller {
 			displayPreferenceTimelinePage();
 		} else if (!timeslotAssignments.isEmpty() && (status.equals("Update") || status.equals("Assigned")))
 		{
+			status = "Update";
 			displayPreferenceTimelinePage();
 		} else if (status.equals("Exchange"))
 		{
