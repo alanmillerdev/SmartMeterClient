@@ -356,7 +356,7 @@ public class Controller {
 	public void saveFeedback()
 	{
 		try {
-			FileWriter writer = new FileWriter("feedback" + System.currentTimeMillis() + ".csv");
+			FileWriter writer = new FileWriter(SmartMeterBackend.dataOutputFolder + "/feedback.csv");
 			writer.append("Metric,Feedback\n");
 			int i = 0;
 			for (String feedback: providedFeedback)

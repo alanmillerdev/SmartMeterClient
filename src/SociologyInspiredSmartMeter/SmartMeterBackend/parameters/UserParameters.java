@@ -17,7 +17,7 @@ public abstract class UserParameters extends FixedParameters {
         // Original Location: "/home/brooks/code/ResourceExchangeArena/results/Set_"
         // Windows PC Location: "C:/Users/alanm/Desktop/ResourceExchangeArena/results/Set_"
         // Macbook Location:
-        public static final String FOLDER_NAME = "C:/Users/alanm/Desktop/ResourceExchangeArena/results/Set_" + seed;
+        public static final String FOLDER_NAME = "Results/Set_" + seed;
 
         // Alter the population size.
         public static final int POPULATION_SIZE = 96;

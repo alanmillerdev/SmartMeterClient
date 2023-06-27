@@ -21,13 +21,15 @@ public class SmartMeterBackend extends UserParameters {
     static Random random = new Random();
 
      // Create a new controller object to store the passed controller object.
-        static Controller controller;
+    static Controller controller;
 
-        // Create a new config object to store the passed config object.
-        Config config;
+    // Create a new config object to store the passed config object.
+    Config config;
 
-        // Create a new settings object to store the passed settings object.
-        Settings settings;
+    // Create a new settings object to store the passed settings object.
+    Settings settings;
+
+    public static String dataOutputFolder;
 
     public void smartMeterSimulationRun(Controller passedController, Config passedConfig, Settings passedSettings)
     {
@@ -130,7 +132,7 @@ public class SmartMeterBackend extends UserParameters {
         random.setSeed(seed);
 
         // Create a directory to store the data output by all simulations being run.
-        String dataOutputFolder = FOLDER_NAME + "/useSC_" + USE_SOCIAL_CAPITAL + "_AType_";
+        dataOutputFolder = FOLDER_NAME + "/useSC_" + USE_SOCIAL_CAPITAL + "_AType_";
         if (!SINGLE_AGENT_TYPE) {
             dataOutputFolder += "mixed";
         } else {
