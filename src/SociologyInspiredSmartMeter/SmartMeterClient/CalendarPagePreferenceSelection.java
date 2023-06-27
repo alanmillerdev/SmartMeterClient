@@ -64,10 +64,10 @@ public class CalendarPagePreferenceSelection extends JFrame{
 
 		staticElements();
 
-		if(settings.getApplicationMode().equals("Appliance"))
+		if(config.getApplicationMode().equals("Appliance"))
 		{
 			ApplicanceTimeslotSelectionUI();
-		} else if(settings.getApplicationMode().equals("Generic"))
+		} else if(config.getApplicationMode().equals("Generic"))
 		{
 			GenericTimeslotSelectionUI();
 		}
@@ -285,7 +285,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 
 		//If the application is in applicance mode, display the applicance timeslot selection UI elements.
 		//Else if the application is in generic mode, display the generic timeslot selection UI elements.
-		if(settings.getApplicationMode().equals("Appliance"))
+		if(config.getApplicationMode().equals("Appliance"))
 		{
 			//Static Label for the timeslot selection section.
 			JLabel applianceSelectionLabel = new JLabel("Appliance Selection");
@@ -302,7 +302,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 			contentPane.setComponentZOrder(timeslotSelectionLabel, 1);
 
 		}
-		else if(settings.getApplicationMode().equals("Generic"))
+		else if(config.getApplicationMode().equals("Generic"))
 		{
 			//Static Label for the timeslot selection section.
 			JLabel timeslotSelectionLabel = new JLabel("Timeslot Selection");
@@ -324,7 +324,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 		addPreferenceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if(settings.getApplicationMode() == "Appliance")
+				if(config.getApplicationMode().equals("Appliance"))
 				{
 					if(selectedAppliance == null)
 					{
@@ -350,7 +350,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						selectedAppliance = null;
 						selectedTimeslot = null;
 					}	
-				} else if(settings.getApplicationMode() == "Generic")
+				} else if(config.getApplicationMode().equals("Generic"))
 				{
 					if(selectedTimeslot == null || selectedTimeslot.equals("Select a timeslot"))
 					{

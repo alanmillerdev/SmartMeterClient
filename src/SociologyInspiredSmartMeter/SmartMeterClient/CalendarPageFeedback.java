@@ -283,30 +283,12 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.add(feedbackInstructionLabel);
 		contentPane.setComponentZOrder(feedbackInstructionLabel, 1);
 
-        //JButton to navigate to the feedback page.
-        JButton btnFeedback = new JButton("Submit Feedback");
-        btnFeedback.addActionListener(new ActionListener() {
-            @SuppressWarnings("deprecation")
-            public void actionPerformed(ActionEvent e) {
-
-                controller.status = "Submitted";
-                dispose();
-                controller.displayAssignedTimelinePage();
-				
-            }
-        });
-        btnFeedback.setBounds(500, 600, 400, 50);
-        btnFeedback.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        contentPane.add(btnFeedback);
-        contentPane.setComponentZOrder(btnFeedback, 1);
-
-
-
     }
 
 	public void feedbackElements()
 	{
-
+		
+		//Icons	
 		ImageIcon thumbUp = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbUp.png");
 		ImageIcon thumbSide = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbSide.png");
 		ImageIcon thumbDown = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbDown.png");
@@ -321,7 +303,7 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.add(metric1Icon);
 		contentPane.setComponentZOrder(metric1Icon, 1);
 		
-		JLabel metric1Label = new JLabel("Metric One");
+		JLabel metric1Label = new JLabel(config.feedbackMetrics.get(0));
 		metric1Label.setBounds(420, 290, 200, 50);
 		metric1Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		contentPane.add(metric1Label);
@@ -329,8 +311,11 @@ public class CalendarPageFeedback extends JFrame{
 
 		ButtonGroup metric1Group = new ButtonGroup();
         JToggleButton metric1ThumbsUp = new JToggleButton(thumbUp);
+		metric1ThumbsUp.setActionCommand("Positive");
         JToggleButton metric1ThumbsSide = new JToggleButton(thumbSide);
+		metric1ThumbsSide.setActionCommand("Neutral");
         JToggleButton metric1ThumbsDown = new JToggleButton(thumbDown);
+		metric1ThumbsDown.setActionCommand("Negative");
         metric1Group.add(metric1ThumbsUp);
         metric1Group.add(metric1ThumbsSide);
         metric1Group.add(metric1ThumbsDown);
@@ -352,7 +337,7 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.add(metric2Icon);
 		contentPane.setComponentZOrder(metric2Icon, 1);
 
-		JLabel metric2Label = new JLabel("Metric Two");
+		JLabel metric2Label = new JLabel(config.feedbackMetrics.get(1));
 		metric2Label.setBounds(620, 290, 200, 50);
 		metric2Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		contentPane.add(metric2Label);
@@ -360,15 +345,17 @@ public class CalendarPageFeedback extends JFrame{
 
 		ButtonGroup metric2Group = new ButtonGroup();
 		JToggleButton metric2ThumbsUp = new JToggleButton(thumbUp);
+		metric2ThumbsUp.setActionCommand("Positive");
 		JToggleButton metric2ThumbsSide = new JToggleButton(thumbSide);
+		metric2ThumbsSide.setActionCommand("Neutral");
 		JToggleButton metric2ThumbsDown = new JToggleButton(thumbDown);
+		metric2ThumbsDown.setActionCommand("Negative");
 		metric2Group.add(metric2ThumbsUp);
 		metric2Group.add(metric2ThumbsSide);
 		metric2Group.add(metric2ThumbsDown);
 		
-		
-
 		metric2ThumbsUp.setBounds(660, 350, 64, 64);
+		
 		metric2ThumbsSide.setBounds(660, 430, 64, 64);
 		metric2ThumbsDown.setBounds(660, 510, 64, 64);
 		contentPane.add(metric2ThumbsUp);
@@ -385,7 +372,7 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.add(metric3Icon);
 		contentPane.setComponentZOrder(metric3Icon, 1);
 
-		JLabel metric3Label = new JLabel("Metric Three");
+		JLabel metric3Label = new JLabel(config.feedbackMetrics.get(2));
 		metric3Label.setBounds(820, 290, 200, 50);
 		metric3Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		contentPane.add(metric3Label);
@@ -393,8 +380,11 @@ public class CalendarPageFeedback extends JFrame{
 
 		ButtonGroup metric3Group = new ButtonGroup();
 		JToggleButton metric3ThumbsUp = new JToggleButton(thumbUp);
+		metric3ThumbsUp.setActionCommand("Positive");
 		JToggleButton metric3ThumbsSide = new JToggleButton(thumbSide);
+		metric3ThumbsSide.setActionCommand("Neutral");
 		JToggleButton metric3ThumbsDown = new JToggleButton(thumbDown);
+		metric3ThumbsDown.setActionCommand("Negative");
 		metric3Group.add(metric3ThumbsUp);
 		metric3Group.add(metric3ThumbsSide);
 		metric3Group.add(metric3ThumbsDown);
@@ -408,6 +398,38 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.setComponentZOrder(metric3ThumbsUp, 1);
 		contentPane.setComponentZOrder(metric3ThumbsSide, 1);
 		contentPane.setComponentZOrder(metric3ThumbsDown, 1);
+
+		//JButton to navigate to the feedback page.
+        JButton btnFeedback = new JButton("Submit Feedback");
+        btnFeedback.addActionListener(new ActionListener() {
+            @SuppressWarnings("deprecation")
+            public void actionPerformed(ActionEvent e) {
+
+				if(metric1Group.getSelection() == null || metric2Group.getSelection() == null || metric3Group.getSelection() == null)
+				{
+
+					JOptionPane.showMessageDialog(null, "Please select a response for each metric.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+
+				} else 
+				{
+
+					controller.providedFeedback.add(metric1Group.getSelection().getActionCommand());
+					controller.providedFeedback.add(metric2Group.getSelection().getActionCommand());
+					controller.providedFeedback.add(metric3Group.getSelection().getActionCommand());
+				
+				}
+                controller.status = "Submitted";
+                dispose();
+                controller.displayAssignedTimelinePage();
+				
+            }
+        });
+        btnFeedback.setBounds(500, 600, 400, 50);
+        btnFeedback.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        contentPane.add(btnFeedback);
+        contentPane.setComponentZOrder(btnFeedback, 1);
+
 	}
 
 }

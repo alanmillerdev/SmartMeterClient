@@ -12,11 +12,14 @@ import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
@@ -42,6 +45,10 @@ public class SettingsPage extends JFrame{
         buildFrame();
 
 		staticElements();
+
+		userPreferences();
+
+		devicePreferences();
 
     }
 	
@@ -273,10 +280,48 @@ public class SettingsPage extends JFrame{
 		
 	}
 
-	public void UserPreferences()
+	public void userPreferences()
 	{
 
+		//Label for agent approach
+		JLabel lblAgentApproach = new JLabel("Agent Mode");
+		lblAgentApproach.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblAgentApproach.setBounds(70, 170, 400, 40);
+		contentPane.add(lblAgentApproach);
+		contentPane.setComponentZOrder(lblAgentApproach, 1);
+
+		//Text area to explain agent approach
+		JTextArea txtrAgentApproach = new JTextArea();
+		txtrAgentApproach.setText("The agent mode determines how your agent will behave, this will force the agent to act in a social or selfish way. \n\n\nSocial: Your agent will cooperate with other agents in the system to find the best outcome for all agents. \n\nSelfish: Your agent will prioritise your timeslot preferences over other agents, this may result in a worse outcome for all agents.");
+		txtrAgentApproach.setWrapStyleWord(true);
+		txtrAgentApproach.setLineWrap(true);
+		txtrAgentApproach.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrAgentApproach.setEditable(false);
+		txtrAgentApproach.setBounds(70, 210, 400, 200);
+		contentPane.add(txtrAgentApproach);
+		contentPane.setComponentZOrder(txtrAgentApproach, 1);
+
+		JComboBox<String> comboBoxAgentApproach = new JComboBox<String>();
+		comboBoxAgentApproach.setModel(new DefaultComboBoxModel<String>(new String[] {"Social", "Selfish"}));
+		comboBoxAgentApproach.setSelectedItem(settings.getAgentMode());
+		comboBoxAgentApproach.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				settings.setAgentMode(comboBoxAgentApproach.getSelectedItem().toString());
+
+			}
+		});
+		comboBoxAgentApproach.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBoxAgentApproach.setBounds(65, 230, 200, 80);
+		contentPane.add(comboBoxAgentApproach);
+		contentPane.setComponentZOrder(comboBoxAgentApproach, 1);
 		
+	}
+
+	public void devicePreferences()
+	{
+
+
 
 	}
 

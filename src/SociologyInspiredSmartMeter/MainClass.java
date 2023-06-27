@@ -12,9 +12,9 @@ public class MainClass {
 	    {
 	      public void run()
 	      {
-	        System.out.println("Shutdown Hook - Save Data Here");
+	        controller.saveSettings();
+			controller.saveFeedback();
 	      }
 	    });
     }
-    
 }

@@ -1,12 +1,14 @@
 package SociologyInspiredSmartMeter.SmartMeterClient;
 
+import java.io.Serializable;
+
 /*
  * Settings class is used to store the settings of the agent client.
  * The settings are stored in a settings object and passed to the agent client.
  * The settings object is  passed to the agent client to determine if the user is selecting appliances and timeslots or just timeslots.
  * The settings object is also passed to the agent client to determine if the agent is taking the social approach or the selfish approach.
  */
-public class Settings {
+public class Settings implements Serializable{
 	
     /*
      * agentMode is a String value that determines which approach the agent is taking.

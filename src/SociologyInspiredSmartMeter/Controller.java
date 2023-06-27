@@ -1,5 +1,10 @@
 package SociologyInspiredSmartMeter;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,9 +24,6 @@ import SociologyInspiredSmartMeter.SmartMeterClient.SettingsPage;
 import SociologyInspiredSmartMeter.SmartMeterClient.StatisticsPage;
 
 public class Controller {
-
-	//TODO: Write a method that is executed at run time that will read in the settings from the settings file
-	//Store those settings in the settings object.
 
 	/*
 	 * Config and Settings are used to store the configuration and settings of the application.
@@ -80,6 +82,8 @@ public class Controller {
 
 	public HashMap<Integer, String> timeslotAssignments = new HashMap<Integer, String>();
 
+	public ArrayList<String> providedFeedback = new ArrayList<String>();
+
 	public int trackedAgentID = 1;
 
 	public Controller() {
@@ -87,10 +91,8 @@ public class Controller {
 		//Sets the status to "Select" by default
 		status = "Select";
 
-		//Sets the agent mode to "Social" and the application mode to "Appliance" by default
-		settings.setAgentMode("Selfish");
-		settings.setApplicationMode("Appliance");
-
+		loadSettings();
+		
 	}
 
 	/*
@@ -321,5 +323,50 @@ public class Controller {
 	public void setAgentMode(String agentMode)
 	{
 		settings.setAgentMode(agentMode);
+	}
+
+	public void saveSettings()
+	{
+		try {
+        FileOutputStream fileOut = new FileOutputStream("settings.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(settings);
+        out.close();
+        fileOut.close();
+        System.out.println("Serialized data is saved in settings.ser");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void loadSettings()
+	{
+		try {
+        FileInputStream fileIn = new FileInputStream("settings.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        settings = (Settings) in.readObject();
+        in.close();
+        fileIn.close();
+        System.out.println("Deserialized data is loaded from settings.ser");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void saveFeedback()
+	{
+		try {
+			FileWriter writer = new FileWriter("feedback" + System.currentTimeMillis() + ".csv");
+			writer.append("Metric,Feedback\n");
+			int i = 0;
+			for (String feedback: providedFeedback)
+			{
+				writer.append(config.getFeedbackMetrics().get(i) + "," + feedback + "\n");
+				i++;
+			}
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

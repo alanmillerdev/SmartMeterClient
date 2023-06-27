@@ -449,7 +449,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 			break;
 		}
 
-        if(settings.getApplicationMode().equals("Appliance"))
+        if(config.getApplicationMode().equals("Appliance"))
         {  
             if (nextTimeslot != null) {
             // handle case where there is a next timeslot
@@ -469,7 +469,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
             nextTimeslotLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
             contentPane.add(nextTimeslotLabel);
             contentPane.setComponentZOrder(nextTimeslotLabel, 1);
-        }else if(settings.getApplicationMode().equals("Generic"))
+        }else if(config.getApplicationMode().equals("Generic"))
         {
             if (nextTimeslot != null) {
             // handle case where there is a next timeslot
