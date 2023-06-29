@@ -525,25 +525,25 @@ public class CalendarPagePreferenceSelection extends JFrame{
 	public void GenericTimeslotSelectionUI()
 	{
 		
-	String[] timeslots = new String[25];
-	timeslots[0] = "Select a timeslot";
-    for (int i = 1; i < 25; i++) {
-        timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
-    };
+		String[] timeslots = new String[25];
+		timeslots[0] = "Select a timeslot";
+		for (int i = 1; i < 25; i++) {
+			timeslots[i] = String.format("%02d:00 - %02d:00", i-1, i);
+		};
+		
+		timeslots[24] = "23:00 - 00:00";
+
+		timeslotComboBox = new JComboBox<>(timeslots);
+		timeslotComboBox.setBounds(210, 110, 300, 100);
+		timeslotComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		contentPane.add(timeslotComboBox);
+		contentPane.setComponentZOrder(timeslotComboBox, 1);
+		timeslotComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedTimeslot = timeslotComboBox.getSelectedItem().toString();
+			}
+		});
 	
-	timeslots[24] = "23:00 - 00:00";
-
-    timeslotComboBox = new JComboBox<>(timeslots);
-	timeslotComboBox.setBounds(210, 110, 300, 100);
-	timeslotComboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	contentPane.add(timeslotComboBox);
-	contentPane.setComponentZOrder(timeslotComboBox, 1);
-	timeslotComboBox.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			selectedTimeslot = timeslotComboBox.getSelectedItem().toString();
-		}
-	});
-
 	}
 
 }

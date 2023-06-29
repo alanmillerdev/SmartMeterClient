@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -53,6 +54,8 @@ public class CalendarPageExchangeInformation extends JFrame{
 		//Passes the timeline builder the y position of the upper timeline that displays
 		//the preference timeline.
 		timelineBuilder(197, controller.timeslotAssignments);
+
+		exchangeMessageBuilder();
 
 		setContentPane(contentPane);
 
@@ -418,4 +421,51 @@ public class CalendarPageExchangeInformation extends JFrame{
 	});	
 	}
 
+	public void exchangeMessageBuilder()
+	{
+
+		int txtY = 300;
+
+		int picY = 285;
+
+		for (ExchangeMessage message : controller.exchangeMessages) {
+
+			JLabel label = new JLabel(message.message);
+			label.setBounds(120, txtY, 800, 32);
+			label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			contentPane.add(label);
+			contentPane.setComponentZOrder(label, 1);
+
+			//Picture
+			ImageIcon image = null;
+
+			if(message.getConnotation().equals("Positive"))
+			{
+
+			image = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbUp.png");
+				
+			} else if(message.getConnotation().equals("Neutral"))
+			{
+
+			image = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbSide.png");
+				
+			} else if(message.getConnotation().equals("Negative"))
+			{
+
+			image = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/thumbDown.png");
+				
+			}
+
+			JLabel picLabel = new JLabel(image);
+			picLabel.setBounds(50, picY, 64, 64);
+			contentPane.add(picLabel);
+			contentPane.setComponentZOrder(picLabel, 1);
+
+			txtY += 80;
+			picY += 80;
+
+		}
+			
+	}
+	
 }

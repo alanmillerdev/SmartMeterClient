@@ -148,6 +148,12 @@ public class Day {
             }
 
             ArrayList<Integer> allocatedTimeSlots = getRandomInitialAllocation(requestedTimeSlots);
+
+            if(a.agentID == controller.getTrackedAgentID()) //Agent ID of the one that we are tracking
+            {
+                controller.randomAllocation = allocatedTimeSlots;
+            }
+
             a.receiveAllocatedTimeSlots(allocatedTimeSlots);
         }
 

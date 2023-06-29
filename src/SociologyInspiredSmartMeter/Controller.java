@@ -1,6 +1,7 @@
 package SociologyInspiredSmartMeter;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
@@ -18,6 +19,7 @@ import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageFeedback;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPagePreferenceSelection;
 import SociologyInspiredSmartMeter.SmartMeterClient.CalendarPageTimeslotTimeline;
 import SociologyInspiredSmartMeter.SmartMeterClient.Config;
+import SociologyInspiredSmartMeter.SmartMeterClient.ExchangeMessage;
 import SociologyInspiredSmartMeter.SmartMeterClient.HomePage;
 import SociologyInspiredSmartMeter.SmartMeterClient.Settings;
 import SociologyInspiredSmartMeter.SmartMeterClient.SettingsPage;
@@ -82,7 +84,11 @@ public class Controller {
 
 	public HashMap<Integer, String> timeslotAssignments = new HashMap<Integer, String>();
 
+	public ArrayList<Integer> randomAllocation = new ArrayList<Integer>();
+
 	public ArrayList<String> providedFeedback = new ArrayList<String>();
+
+	public ArrayList<ExchangeMessage> exchangeMessages = new ArrayList<ExchangeMessage>();
 
 	public int trackedAgentID = 1;
 
@@ -311,6 +317,7 @@ public class Controller {
 			timeslotAssignments.put(timeslot, assignment);
 			i++;
 		}
+		exchangeMessageBuilder();
 		status = "Update";
 	}
 
@@ -365,8 +372,46 @@ public class Controller {
 				i++;
 			}
 			writer.close();
+		}catch
+			(FileNotFoundException ex) {
+			System.out.println("Process incomplete. Skipping file saving.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void exchangeMessageBuilder()
+	{
+		for (Map.Entry<Integer, String> entry : timeslotAssignments.entrySet()) {
+			{
+
+				ExchangeMessage message = new ExchangeMessage();
+
+				for(Integer rTimeslot : randomAllocation)
+				{
+					if(rTimeslot == entry.getKey())
+					{
+						message.setTimeslot(entry.getKey());
+						message.setMessage("You were randomly allocated your " + entry.getKey() + ":00 - " + (entry.getKey() + 1) + ":00 " + "timeslot.");
+						message.setConnotation("Neutral");
+	
+					} else {
+						message.setTimeslot(entry.getKey());
+						message.setMessage("Your agent made an exchange for your " + entry.getKey() + ":00 - " + (entry.getKey() + 1) + ":00 " + "timeslot.");
+						message.setConnotation("Positive");
+					}
+
+				}
+
+				exchangeMessages.add(message);
+
+			}
+		}
+	}
+
+	public ArrayList<ExchangeMessage> getExchangeMessages()
+	{
+		return exchangeMessages;
+	}
+
 }
