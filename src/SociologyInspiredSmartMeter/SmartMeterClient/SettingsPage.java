@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -98,7 +99,8 @@ public class SettingsPage extends JFrame{
 		// Background Image
 		JLabel backgroundImage;
 		try {
-			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/BackgroundSettings.png"));
+			InputStream backgroundImageStream = getClass().getResourceAsStream("/resources/BackgroundSettings.png");
+			BufferedImage backgroundImageImage = ImageIO.read(backgroundImageStream);
 			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
 			backgroundImage.setBounds(0, 0, 1400, 800);
 			contentPane.add(backgroundImage);
@@ -109,11 +111,11 @@ public class SettingsPage extends JFrame{
 		}
 
 		// Icon Images
-
 		// Battery Icon
 		JLabel batteryIcon;
 		try {
-			BufferedImage batteryIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/battery.png"));
+			InputStream batteryIconStream = getClass().getResourceAsStream("/resources/battery.png");
+			BufferedImage batteryIconImage = ImageIO.read(batteryIconStream);
 			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
 			batteryIcon.setBounds(1190, 45, 64, 32);
 			contentPane.add(batteryIcon);
@@ -126,7 +128,8 @@ public class SettingsPage extends JFrame{
 		// Signal Icon
 		JLabel signalIcon;
 		try {
-			BufferedImage signalIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/signal.png"));
+			InputStream signalIconStream = getClass().getResourceAsStream("/resources/signal.png");
+			BufferedImage signalIconImage = ImageIO.read(signalIconStream);
 			signalIcon = new JLabel(new ImageIcon(signalIconImage));
 			signalIcon.setBounds(40, 40, 32, 32);
 			contentPane.add(signalIcon);
@@ -140,7 +143,8 @@ public class SettingsPage extends JFrame{
 		// Home Navigation Button
 		JButton btnHome;
 		try {
-			BufferedImage buttonIconHome = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/home.png"));
+			InputStream buttonIconHomeStream = getClass().getResourceAsStream("/resources/home.png");
+			BufferedImage buttonIconHome = ImageIO.read(buttonIconHomeStream);
 			btnHome = new JButton(new ImageIcon(buttonIconHome));
 			btnHome.setBorder(BorderFactory.createEmptyBorder());
 			btnHome.setContentAreaFilled(false);
@@ -164,7 +168,8 @@ public class SettingsPage extends JFrame{
 		// Settings Navigation Button
 		JButton btnSettings;
 		try {
-			BufferedImage buttonIconSettings = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/settings.png"));
+			InputStream buttonIconSettingsStream = getClass().getResourceAsStream("/resources/settings.png");
+			BufferedImage buttonIconSettings = ImageIO.read(buttonIconSettingsStream);
 			btnSettings = new JButton(new ImageIcon(buttonIconSettings));
 			btnSettings.setBorder(BorderFactory.createEmptyBorder());
 			btnSettings.setContentAreaFilled(false);
@@ -188,7 +193,8 @@ public class SettingsPage extends JFrame{
 		// Refresh Navigation Button
 		JButton btnRefresh;
 		try {
-			BufferedImage buttonIconRefresh = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/refresh.png"));
+			InputStream buttonIconRefreshStream = getClass().getResourceAsStream("/resources/refresh.png");
+			BufferedImage buttonIconRefresh = ImageIO.read(buttonIconRefreshStream);
 			btnRefresh = new JButton(new ImageIcon(buttonIconRefresh));
 			btnRefresh.setBorder(BorderFactory.createEmptyBorder());
 			btnRefresh.setContentAreaFilled(false);
@@ -212,7 +218,8 @@ public class SettingsPage extends JFrame{
 		// Calendar Navigation Button
 		JButton btnCalendar;
 		try {
-			BufferedImage buttonIconCalendar = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/calendar.png"));
+			InputStream buttonIconCalendarStream = getClass().getResourceAsStream("/resources/calendar.png");
+			BufferedImage buttonIconCalendar = ImageIO.read(buttonIconCalendarStream);
 			btnCalendar = new JButton(new ImageIcon(buttonIconCalendar));
 			btnCalendar.setBorder(BorderFactory.createEmptyBorder());
 			btnCalendar.setContentAreaFilled(false);
@@ -236,7 +243,8 @@ public class SettingsPage extends JFrame{
 		// Statistics Navigation Button
 		JButton btnStatistics;
 		try {
-			BufferedImage buttonIconStatistics = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/bar-chart.png"));
+			InputStream buttonIconStatisticsStream = getClass().getResourceAsStream("/resources/bar-chart.png");
+			BufferedImage buttonIconStatistics = ImageIO.read(buttonIconStatisticsStream);
 			btnStatistics = new JButton(new ImageIcon(buttonIconStatistics));
 			btnStatistics.setBorder(BorderFactory.createEmptyBorder());
 			btnStatistics.setContentAreaFilled(false);

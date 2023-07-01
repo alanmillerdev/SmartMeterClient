@@ -29,7 +29,7 @@ public class Config {
 	 */
 	public Config() {
 
-		applicationMode = "Appliance";
+		applicationMode = "Generic";
 
 		feedbackMetrics.add("Config Metric");
 		feedbackMetrics.add("Config Metric");

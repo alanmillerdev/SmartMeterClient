@@ -85,10 +85,10 @@ public class HomePage extends JFrame {
 		contentPane.add(announcementText);
 		
 		// Static Images
-		// Background Image
+		//Background Image
 		JLabel backgroundImage;
 		try {
-			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/background.png"));
+			BufferedImage backgroundImageImage = ImageIO.read(getClass().getResource("/resources/Background.png"));
 			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
 			backgroundImage.setBounds(0, 0, 1400, 800);
 			contentPane.add(backgroundImage);
@@ -99,11 +99,10 @@ public class HomePage extends JFrame {
 		}
 
 		// Icon Images
-
 		// Battery Icon
 		JLabel batteryIcon;
 		try {
-			BufferedImage batteryIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/battery.png"));
+			BufferedImage batteryIconImage = ImageIO.read(getClass().getResource("/resources/battery.png"));
 			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
 			batteryIcon.setBounds(1190, 45, 64, 32);
 			contentPane.add(batteryIcon);
@@ -116,7 +115,7 @@ public class HomePage extends JFrame {
 		// Signal Icon
 		JLabel signalIcon;
 		try {
-			BufferedImage signalIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/signal.png"));
+			BufferedImage signalIconImage = ImageIO.read(getClass().getResource("/resources/signal.png"));
 			signalIcon = new JLabel(new ImageIcon(signalIconImage));
 			signalIcon.setBounds(40, 40, 32, 32);
 			contentPane.add(signalIcon);
@@ -130,7 +129,7 @@ public class HomePage extends JFrame {
 		// Home Navigation Button
 		JButton btnHome;
 		try {
-			BufferedImage buttonIconHome = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/home.png"));
+			BufferedImage buttonIconHome = ImageIO.read(getClass().getResource("/resources/home.png"));
 			btnHome = new JButton(new ImageIcon(buttonIconHome));
 			btnHome.setBorder(BorderFactory.createEmptyBorder());
 			btnHome.setContentAreaFilled(false);
@@ -154,7 +153,7 @@ public class HomePage extends JFrame {
 		// Settings Navigation Button
 		JButton btnSettings;
 		try {
-			BufferedImage buttonIconSettings = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/settings.png"));
+			BufferedImage buttonIconSettings = ImageIO.read(getClass().getResource("/resources/settings.png"));
 			btnSettings = new JButton(new ImageIcon(buttonIconSettings));
 			btnSettings.setBorder(BorderFactory.createEmptyBorder());
 			btnSettings.setContentAreaFilled(false);
@@ -178,7 +177,7 @@ public class HomePage extends JFrame {
 		// Refresh Navigation Button
 		JButton btnRefresh;
 		try {
-			BufferedImage buttonIconRefresh = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/refresh.png"));
+			BufferedImage buttonIconRefresh = ImageIO.read(getClass().getResource("/resources/refresh.png"));
 			btnRefresh = new JButton(new ImageIcon(buttonIconRefresh));
 			btnRefresh.setBorder(BorderFactory.createEmptyBorder());
 			btnRefresh.setContentAreaFilled(false);
@@ -202,7 +201,7 @@ public class HomePage extends JFrame {
 		// Calendar Navigation Button
 		JButton btnCalendar;
 		try {
-			BufferedImage buttonIconCalendar = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/calendar.png"));
+			BufferedImage buttonIconCalendar = ImageIO.read(getClass().getResource("/resources/calendar.png"));
 			btnCalendar = new JButton(new ImageIcon(buttonIconCalendar));
 			btnCalendar.setBorder(BorderFactory.createEmptyBorder());
 			btnCalendar.setContentAreaFilled(false);
@@ -226,7 +225,7 @@ public class HomePage extends JFrame {
 		// Statistics Navigation Button
 		JButton btnStatistics;
 		try {
-			BufferedImage buttonIconStatistics = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/bar-chart.png"));
+			BufferedImage buttonIconStatistics = ImageIO.read(getClass().getResource("/resources/bar-chart.png"));
 			btnStatistics = new JButton(new ImageIcon(buttonIconStatistics));
 			btnStatistics.setBorder(BorderFactory.createEmptyBorder());
 			btnStatistics.setContentAreaFilled(false);

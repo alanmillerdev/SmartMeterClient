@@ -102,7 +102,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
         JLabel backgroundImage;
 
 		try {
-			BufferedImage backgroundImageImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/Background1Timeline.png"));
+			BufferedImage backgroundImageImage = ImageIO.read(getClass().getResourceAsStream("/resources/Background1Timeline.png"));
 			backgroundImage = new JLabel(new ImageIcon(backgroundImageImage));
 			backgroundImage.setBounds(0, 0, 1400, 800);
 			contentPane.add(backgroundImage);
@@ -117,7 +117,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Battery Icon
 		JLabel batteryIcon;
 		try {
-			BufferedImage batteryIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/battery.png"));
+			BufferedImage batteryIconImage = ImageIO.read(getClass().getResourceAsStream("/resources/battery.png"));
 			batteryIcon = new JLabel(new ImageIcon(batteryIconImage));
 			batteryIcon.setBounds(1190, 45, 64, 32);
 			contentPane.add(batteryIcon);
@@ -130,7 +130,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Signal Icon
 		JLabel signalIcon;
 		try {
-			BufferedImage signalIconImage = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/signal.png"));
+			BufferedImage signalIconImage = ImageIO.read(getClass().getResourceAsStream("/resources/signal.png"));
 			signalIcon = new JLabel(new ImageIcon(signalIconImage));
 			signalIcon.setBounds(40, 40, 32, 32);
 			contentPane.add(signalIcon);
@@ -144,7 +144,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Home Navigation Button
 		JButton btnHome;
 		try {
-			BufferedImage buttonIconHome = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/home.png"));
+			BufferedImage buttonIconHome = ImageIO.read(getClass().getResourceAsStream("/resources/home.png"));
 			btnHome = new JButton(new ImageIcon(buttonIconHome));
 			btnHome.setBorder(BorderFactory.createEmptyBorder());
 			btnHome.setContentAreaFilled(false);
@@ -168,7 +168,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Settings Navigation Button
 		JButton btnSettings;
 		try {
-			BufferedImage buttonIconSettings = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/settings.png"));
+			BufferedImage buttonIconSettings = ImageIO.read(getClass().getResourceAsStream("/resources/settings.png"));
 			btnSettings = new JButton(new ImageIcon(buttonIconSettings));
 			btnSettings.setBorder(BorderFactory.createEmptyBorder());
 			btnSettings.setContentAreaFilled(false);
@@ -192,7 +192,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Refresh Navigation Button
 		JButton btnRefresh;
 		try {
-			BufferedImage buttonIconRefresh = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/refresh.png"));
+			BufferedImage buttonIconRefresh = ImageIO.read(getClass().getResourceAsStream("/resources/refresh.png"));
 			btnRefresh = new JButton(new ImageIcon(buttonIconRefresh));
 			btnRefresh.setBorder(BorderFactory.createEmptyBorder());
 			btnRefresh.setContentAreaFilled(false);
@@ -214,7 +214,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Calendar Navigation Button
 		JButton btnCalendar;
 		try {
-			BufferedImage buttonIconCalendar = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/calendar.png"));
+			BufferedImage buttonIconCalendar = ImageIO.read(getClass().getResourceAsStream("/resources/calendar.png"));
 			btnCalendar = new JButton(new ImageIcon(buttonIconCalendar));
 			btnCalendar.setBorder(BorderFactory.createEmptyBorder());
 			btnCalendar.setContentAreaFilled(false);
@@ -238,7 +238,7 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 		// Statistics Navigation Button
 		JButton btnStatistics;
 		try {
-			BufferedImage buttonIconStatistics = ImageIO.read(new File("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/bar-chart.png"));
+			BufferedImage buttonIconStatistics = ImageIO.read(getClass().getResourceAsStream("/resources/bar-chart.png"));
 			btnStatistics = new JButton(new ImageIcon(buttonIconStatistics));
 			btnStatistics.setBorder(BorderFactory.createEmptyBorder());
 			btnStatistics.setContentAreaFilled(false);
@@ -296,12 +296,11 @@ public class CalendarPageAssignedTimeslots extends JFrame{
 	public void timelineBuilder(int position, HashMap<Integer, String> timeslotPreferences)
 	{
 
-		ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineSmall.png");
-		ImageIcon tumbleDryerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerSmall.png");
-		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherSmall.png");
-		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterSmall.png");
-		ImageIcon pointerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/pointerSmall.png");
-
+		ImageIcon washingMachineImage = new ImageIcon(getClass().getResource("/resources/washingMachineSmall.png"));
+		ImageIcon tumbleDryerImage = new ImageIcon(getClass().getResource("/resources/tumbleDryerSmall.png"));
+		ImageIcon dishwasherImage = new ImageIcon(getClass().getResource("/resources/dishwasherSmall.png"));
+		ImageIcon heaterImage = new ImageIcon(getClass().getResource("/resources/heaterSmall.png"));
+		ImageIcon pointerImage = new ImageIcon(getClass().getResource("/resources/pointerSmall.png"));
 		//For each timeslot in the preference list, create an icon and display it on the timeline.
 
 		timeslotPreferences.forEach((key, value) -> {
@@ -420,10 +419,10 @@ public class CalendarPageAssignedTimeslots extends JFrame{
     public void nextTimeslotHandler()
     {
 
-        ImageIcon washingMachineImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/washingMachineMedium.png");
-		ImageIcon tumbleDryerImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/tumbleDryerMedium.png");
-		ImageIcon dishwasherImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/dishwasherMedium.png");
-		ImageIcon heaterImage = new ImageIcon("src/SociologyInspiredSmartMeter/SmartMeterClient/Icons/heaterMedium.png");
+		ImageIcon washingMachineImage = new ImageIcon(getClass().getResource("/resources/washingMachineMedium.png"));
+		ImageIcon tumbleDryerImage = new ImageIcon(getClass().getResource("/resources/tumbleDryerMedium.png"));
+		ImageIcon dishwasherImage = new ImageIcon(getClass().getResource("/resources/dishwasherMedium.png"));
+		ImageIcon heaterImage = new ImageIcon(getClass().getResource("/resources/heaterMedium.png"));
 
         JLabel nextTimeslotLabel = new JLabel("");
 
