@@ -278,7 +278,19 @@ public class CalendarPageAssignedTimeslots extends JFrame{
         contentPane.setComponentZOrder(nextTimeslotLabel, 1);
         
         nextTimeslotHandler();
-        
+
+		//Create a button to start a new day
+		JButton btnNewDay = new JButton("Start New Day");
+		btnNewDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				controller.startNewDay();
+			}
+		});
+		btnNewDay.setBounds(600, 600, 200, 50);
+		btnNewDay.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		contentPane.add(btnNewDay);
+		contentPane.setComponentZOrder(btnNewDay, 1);
     }
 
 	public void timelineBuilder(int position, HashMap<Integer, String> timeslotPreferences)

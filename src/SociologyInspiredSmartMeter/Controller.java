@@ -414,4 +414,17 @@ public class Controller {
 		return exchangeMessages;
 	}
 
+	public void startNewDay()
+	{
+		status = "Select";
+		timeslotPreferences.clear();
+		timeslotAssignments.clear();
+		exchangeMessages.clear();
+		providedFeedback.clear();
+		algorithmThread = new Thread(() -> {
+    		SmartMeterBackend smartMeterBackend = new SmartMeterBackend();
+    		smartMeterBackend.smartMeterSimulationRun(this, config, settings);
+		});
+		displayHomePage();
+	}
 }

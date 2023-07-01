@@ -340,7 +340,6 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						return;
 					} else 
 					{
-						contentPane.remove(instructionLabel);
 						//Adds the timeslot and the appliance to the timeslot preference list to be used in the algorithm and UI.
 						timeslotPreferences.put(Integer.parseInt(selectedTimeslot.substring(0, 2)), selectedAppliance);
 						//Creates a string to be displayed in the UI.
@@ -349,6 +348,14 @@ public class CalendarPagePreferenceSelection extends JFrame{
 						timeslotComboBox.setSelectedIndex(0);
 						selectedAppliance = null;
 						selectedTimeslot = null;
+
+						if(UITimeslotList.size() == 4)
+						{
+							instructionLabel.setText("Submit your timeslot preferences.");
+						}else{
+							instructionLabel.setText("Select " + (4 - UITimeslotList.size()) + " timeslots to set as your preferences to use appliances.");
+						}
+
 					}	
 				} else if(config.getApplicationMode().equals("Generic"))
 				{
@@ -414,7 +421,7 @@ public class CalendarPagePreferenceSelection extends JFrame{
 
 		//Instruction JLabel
 		instructionLabel = new JLabel("Select 4 timeslots to set as your preferences to use appliances.");
-		instructionLabel.setBounds(740, 350, 600, 50);
+		instructionLabel.setBounds(740, 130, 600, 50);
 		instructionLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		contentPane.add(instructionLabel);
 		contentPane.setComponentZOrder(instructionLabel, 1);
