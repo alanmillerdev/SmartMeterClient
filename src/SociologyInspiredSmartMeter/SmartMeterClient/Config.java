@@ -19,21 +19,36 @@ public class Config {
 	/*
 	 * feedbackMetrics is a String ArrayList that determines that holds the metrics to be used in the feedback page.
 	 * Metrics are as follows:
-	 * 
+	 * Fairness
+	 * Trust
+	 * Satisfaction
+	 * Control
+	 * Engagement
+	 * Motivation
+	 * Enjoyment
+	 * Understanding
 	 */
 	ArrayList<String> feedbackMetrics = new ArrayList<String>();
+
+	ArrayList<String> feedbackMetricsDescriptions = new ArrayList<String>();
 
 	/*
 	 * Constructor for the config class.
 	 * @param applicationMode is a String value that determines if the user is selecting appliances and timeslots or just timeslots.
+	 * @param feedbackMetrics is a String ArrayList that determines that holds the metrics to be used in the feedback page.
+	 * Each metric that is to be used in the feedback page is added to the ArrayList.
+	 * Each metric used should also have a description added to the feedbackMetricsDescriptions ArrayList.
 	 */
 	public Config() {
 
-		applicationMode = "Generic";
+		applicationMode = "Appliance";
 
-		feedbackMetrics.add("Config Metric");
-		feedbackMetrics.add("Config Metric");
-		feedbackMetrics.add("Config Metric");
+		feedbackMetrics.add("Fairness");
+		feedbackMetricsDescriptions.add("Fairness: How fair was the timeslot allocation?");
+		feedbackMetrics.add("Satisfaction");
+		feedbackMetricsDescriptions.add("Satisfaction: How satisfied were you with the outcome of the timeslot allocation?");
+		feedbackMetrics.add("Understanding");
+		feedbackMetricsDescriptions.add("Understanding: How well did you understand the timeslot allocation process?");
 		
 	}
 

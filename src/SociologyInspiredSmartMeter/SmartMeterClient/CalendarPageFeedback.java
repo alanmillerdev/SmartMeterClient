@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -287,6 +288,22 @@ public class CalendarPageFeedback extends JFrame{
 
 	public void feedbackElements()
 	{
+		//Text Area to describe the metrics that are being used.
+		JTextArea feedbackTextArea = new JTextArea();
+		feedbackTextArea.setBounds(100, 200, 1200, 400);
+		feedbackTextArea.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		feedbackTextArea.setLineWrap(true);
+		feedbackTextArea.setWrapStyleWord(true);
+		feedbackTextArea.setEditable(false);
+		
+		for (String metric : config.feedbackMetricsDescriptions) {
+			
+			feedbackTextArea.append(metric + "\n");
+			
+		}
+
+		contentPane.add(feedbackTextArea);
+		contentPane.setComponentZOrder(feedbackTextArea, 1);
 		
 		//Icons	
 		ImageIcon thumbUp = new ImageIcon(getClass().getResource("/resources/thumbUp.png"));
@@ -298,14 +315,17 @@ public class CalendarPageFeedback extends JFrame{
 
 		//Metric 1
 		//Metric Icon
+		/*
 		JLabel metric1Icon = new JLabel(metricOneIcon);
 		metric1Icon.setBounds(460, 220, 64, 64);
 		contentPane.add(metric1Icon);
 		contentPane.setComponentZOrder(metric1Icon, 1);
-		
+		*/
+
 		JLabel metric1Label = new JLabel(config.feedbackMetrics.get(0));
-		metric1Label.setBounds(420, 290, 200, 50);
+		metric1Label.setBounds(395, 290, 200, 50);
 		metric1Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		metric1Label.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(metric1Label);
 		contentPane.setComponentZOrder(metric1Label, 1);
 
@@ -332,14 +352,17 @@ public class CalendarPageFeedback extends JFrame{
 
 		// Metric 2
 		// Metric Icon
+		/*
 		JLabel metric2Icon = new JLabel(metricTwoIcon);
 		metric2Icon.setBounds(660, 220, 64, 64);
 		contentPane.add(metric2Icon);
 		contentPane.setComponentZOrder(metric2Icon, 1);
+		*/
 
 		JLabel metric2Label = new JLabel(config.feedbackMetrics.get(1));
-		metric2Label.setBounds(620, 290, 200, 50);
+		metric2Label.setBounds(595, 290, 200, 50);
 		metric2Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		metric2Label.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(metric2Label);
 		contentPane.setComponentZOrder(metric2Label, 1);
 
@@ -367,14 +390,17 @@ public class CalendarPageFeedback extends JFrame{
 
 		// Metric 3
 		// Metric Icon
+		/*
 		JLabel metric3Icon = new JLabel(metricThreeIcon);
 		metric3Icon.setBounds(860, 220, 64, 64);
 		contentPane.add(metric3Icon);
 		contentPane.setComponentZOrder(metric3Icon, 1);
+		*/
 
 		JLabel metric3Label = new JLabel(config.feedbackMetrics.get(2));
-		metric3Label.setBounds(820, 290, 200, 50);
+		metric3Label.setBounds(795, 290, 200, 50);
 		metric3Label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		metric3Label.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(metric3Label);
 		contentPane.setComponentZOrder(metric3Label, 1);
 
@@ -409,19 +435,23 @@ public class CalendarPageFeedback extends JFrame{
 				{
 
 					JOptionPane.showMessageDialog(null, "Please select a response for each metric.", "Error", JOptionPane.ERROR_MESSAGE);
+					//Revalidate and repaint to stop an issue where elements on the UI would disappear after the error message was displayed.
+					revalidate();
+					repaint();
 					return;
-
+		
 				} else 
 				{
 
 					controller.providedFeedback.add(metric1Group.getSelection().getActionCommand());
 					controller.providedFeedback.add(metric2Group.getSelection().getActionCommand());
 					controller.providedFeedback.add(metric3Group.getSelection().getActionCommand());
+					controller.status = "Submitted";
+					dispose();
+					controller.displayAssignedTimelinePage();
 				
 				}
-                controller.status = "Submitted";
-                dispose();
-                controller.displayAssignedTimelinePage();
+                
 				
             }
         });
@@ -429,7 +459,6 @@ public class CalendarPageFeedback extends JFrame{
         btnFeedback.setFont(new Font("Tahoma", Font.PLAIN, 30));
         contentPane.add(btnFeedback);
         contentPane.setComponentZOrder(btnFeedback, 1);
-
 	}
 
 }
