@@ -319,6 +319,7 @@ public class Controller {
 		}
 		exchangeMessageBuilder();
 		status = "Update";
+		
 	}
 
 	//getter and setter for the agent mode

@@ -284,13 +284,9 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.add(feedbackInstructionLabel);
 		contentPane.setComponentZOrder(feedbackInstructionLabel, 1);
 
-    }
-
-	public void feedbackElements()
-	{
 		//Text Area to describe the metrics that are being used.
 		JTextArea feedbackTextArea = new JTextArea();
-		feedbackTextArea.setBounds(100, 200, 1200, 400);
+		feedbackTextArea.setBounds(100, 200, 1200, 100);
 		feedbackTextArea.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		feedbackTextArea.setLineWrap(true);
 		feedbackTextArea.setWrapStyleWord(true);
@@ -304,6 +300,11 @@ public class CalendarPageFeedback extends JFrame{
 
 		contentPane.add(feedbackTextArea);
 		contentPane.setComponentZOrder(feedbackTextArea, 1);
+
+    }
+
+	public void feedbackElements()
+	{
 		
 		//Icons	
 		ImageIcon thumbUp = new ImageIcon(getClass().getResource("/resources/thumbUp.png"));
