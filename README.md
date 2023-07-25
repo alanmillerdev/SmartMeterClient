@@ -1,1 +1,1 @@
-# SmartMeterClient
+# SociologyInspiredSmartMeter
