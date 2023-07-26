@@ -427,8 +427,8 @@ public class CalendarPageFeedback extends JFrame{
 		contentPane.setComponentZOrder(metric3ThumbsDown, 1);
 
 		//JButton to navigate to the feedback page.
-        JButton btnFeedback = new JButton("Submit Feedback");
-        btnFeedback.addActionListener(new ActionListener() {
+        JButton btnSubmitFeedback = new JButton("Submit Feedback");
+        btnSubmitFeedback.addActionListener(new ActionListener() {
             @SuppressWarnings("deprecation")
             public void actionPerformed(ActionEvent e) {
 
@@ -456,10 +456,10 @@ public class CalendarPageFeedback extends JFrame{
 				
             }
         });
-        btnFeedback.setBounds(500, 600, 400, 50);
-        btnFeedback.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        contentPane.add(btnFeedback);
-        contentPane.setComponentZOrder(btnFeedback, 1);
+        btnSubmitFeedback.setBounds(500, 600, 400, 50);
+        btnSubmitFeedback.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        contentPane.add(btnSubmitFeedback);
+        contentPane.setComponentZOrder(btnSubmitFeedback, 1);
 	}
 
 }

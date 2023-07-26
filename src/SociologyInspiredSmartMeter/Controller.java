@@ -30,8 +30,8 @@ public class Controller {
 	/*
 	 * Config and Settings are used to store the configuration and settings of the application.
 	 */
-	Config config = new Config();
-	Settings settings = new Settings();
+	public Config config = new Config();
+	public Settings settings = new Settings();
 	SmartMeterBackend backend = new SmartMeterBackend();
 
 	/*
